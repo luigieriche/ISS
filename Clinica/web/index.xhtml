@@ -1,37 +1,75 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
- <h:head>
- <title>Cadastro</title>
- </h:head>
- <h:body>
- <h:form>
- <h:panelGrid columns="3">
- <h:outputLabel value="Nome:"/>
- <h:inputText id="nome"  size="20" />
- <h:message for="nome" />
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
- <h:outputLabel value="Endereçoo:"/>
- <h:inputText id="end"  size="20"  />
- <h:message for="end" />
+    <h:head>
+        <title>Cadastro</title>
+    </h:head>
 
- <h:outputLabel value="Número:"/>
- <h:inputText id="nro"  size="20" />
- <h:message for="nro" />
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="3">
+                <p:outputLabel value="Nome:" />
+                <p:inputText id="nome"  size="20" value="#{pessoaMB.pessoa.nome}" required="true" requiredMessage="Campo Obrigatório"/>
+                <p:message for="nome" />
 
- <h:outputLabel value="Telefone:"/>
- <h:inputText id="tel"  size="20" />
- <h:message for="tel" />
+                <p:outputLabel value="Endereçoo:"/>
+                <p:inputText id="end"  size="20"  value="#{pessoaMB.pessoa.endereco}"/>
+                <p:message for="end" />
 
- <h:outputLabel value="Cidade:"/>
- <h:inputText id="mun"  size="20" />
- <h:message for="mun" />
+                <p:outputLabel value="Número:"/>
+                <p:inputText id="nro"  size="20" value="#{pessoaMB.pessoa.numero}"/>
+                <p:message for="nro" />
 
- <h:commandButton id="btnE" value="Enviar" />
- <h:commandButton id="btnL" value="Limpar"/>
+                <p:outputLabel value="Telefone:"/>
+                <p:inputText id="tel"  size="20" value="#{pessoaMB.pessoa.telefone}"/>
+                <p:message for="tel" />
 
- </h:panelGrid>
- </h:form>
- </h:body>
+                <p:outputLabel value="Cidade:"/>
+                <p:inputText id="mun"  size="20" value="#{pessoaMB.pessoa.cidade}"/>
+                <p:message for="mun" />
+
+                <h:commandButton id="btnE" value="Enviar" type="submit" action="#{pessoaMB.salvarPessoa}"/>
+                <p:commandButton id="btnL" value="Limpar" type="reset"/>
+
+            </h:panelGrid>
+        </h:form>
+        <h:panelGrid>
+            <h:dataTable id="tablePessoa" value="#{pessoaMB.pessoaLista}" var="p" title="Pessoas Cadastradas" border="1" rows="10" >
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="NOME" />
+                    </f:facet>
+                    <h:outputText value="#{p.nome}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ENDEREÃ‡O" />
+                    </f:facet>
+                    <h:outputText value="#{p.endereco}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="NÚMERO" />
+                    </f:facet>
+                    <h:outputText value="#{p.numero}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="TELEFONE" />
+                    </f:facet>
+                    <h:outputText value="#{p.telefone}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="CIDADE" />
+                    </f:facet>
+                    <h:outputText value="#{p.cidade}"/>
+                </h:column>
+            </h:dataTable>
+        </h:panelGrid> 
+    </h:body>
 </html>
