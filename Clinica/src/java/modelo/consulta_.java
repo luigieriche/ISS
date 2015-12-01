@@ -9,7 +9,7 @@ package modelo;
  *
  * @author luiz.ferreira
  */
-public class consulta {
+public class consulta_ {
     
     private int id_consulta;
     private int id_paciente;
