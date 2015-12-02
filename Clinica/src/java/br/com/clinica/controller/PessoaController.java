@@ -9,6 +9,7 @@ import br.com.clinica.dao.InterfacePessoa;
 import br.com.clinica.dao.PessoaDao;
 import br.com.clinica.model.Pessoa;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -23,12 +24,15 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @SessionScoped
-public class PessoaController {
+public class PessoaController implements Serializable{
     
     private Pessoa pessoa;
     private DataModel listaPessoa;
 
     public Pessoa getPessoa() {
+        if (this.pessoa == null){
+            this.pessoa = new Pessoa();
+        }
         return pessoa;
     }
 

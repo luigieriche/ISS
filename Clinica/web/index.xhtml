@@ -11,33 +11,27 @@
         <h:form>
             
             <h:outputText value="Nome: "/>
-            <h:outputText id="nome" value="#{pessoaController.pessoa.nome}" /><br/>
+            <h:inputText id="nome" value="#{pessoaController.pessoa.nome}" /><br/>
             <h:outputText value="Email: "/>
-            <h:outputText id="nome" value="#{pessoaController.pessoa.email}" /><br/>
+            <h:inputText id="email" value="#{pessoaController.pessoa.email}" /><br/>
             <h:outputText value="Celular: "/>
-            <h:outputText id="nome" value="#{pessoaController.pessoa.celular}" /><br/>
+            <h:inputText id="celular" value="#{pessoaController.pessoa.celular}" /><br/>
             <h:outputText value="Telefone: "/>
-            <h:outputText id="nome" value="#{pessoaController.pessoa.telefone}" /><br/>
+            <h:inputText id="telefone" value="#{pessoaController.pessoa.telefone}" /><br/>
             <h:outputText value="Data de Nascimento: "/>
-            <h:outputText id="nome" value="#{pessoaController.pessoa.data_nascimento}" /><br/>
+            <h:inputText id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" /><br/>
             <h:outputText value="Sexo: "/>
-            <h:outputText id="nome" value="#{pessoaController.pessoa.sexo}" /><br/>
+            <h:inputText id="sexo" value="#{pessoaController.pessoa.sexo}" /><br/>
             <h:outputText value="CPF: "/>
-            <h:outputText id="nome" value="#{pessoaController.pessoa.cpf}" /><br/>
+            <h:inputText id="cpf" value="#{pessoaController.pessoa.cpf}" /><br/>
             <h:outputText value="Cidade: "/>
-            <h:outputText id="nome" value="#{pessoaController.pessoa.cidade}" /><br/>
+            <h:inputText id="cidade" value="#{pessoaController.pessoa.cidade}" /><br/>
             <h:outputText value="Endereco: "/>
-            <h:outputText id="nome" value="teste" /><br/>
+            <h:inputText id="endereco" value="teste" /><br/>
             <h:outputText value="Número: "/>
-            <h:outputText id="nome" value="#{pessoaController.pessoa.numero}" /><br/>
+            <h:inputText id="numero" value="#{pessoaController.pessoa.numero}" /><br/>
             
             <h:commandButton value="Salvar" id="salva" actionListener="#{pessoaController.adicionar(actionEvent)}" />
         </h:form>
     </h:body>
-    
-
-
- </h:panelGrid>
- </h:form>
- </h:body>
 </html>

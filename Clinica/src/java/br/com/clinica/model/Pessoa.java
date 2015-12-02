@@ -31,6 +31,22 @@ public class Pessoa implements Serializable {
     private String numero;
     private String cidade;
 
+    public Pessoa() {
+    }
+
+    public Pessoa(Long id_pessoa, String nome, String email, String celular, String telefone, String data_nascimento, String sexo, String cpf, String numero, String cidade) {
+        this.id_pessoa = id_pessoa;
+        this.nome = nome;
+        this.email = email;
+        this.celular = celular;
+        this.telefone = telefone;
+        this.data_nascimento = data_nascimento;
+        this.sexo = sexo;
+        this.cpf = cpf;
+        this.numero = numero;
+        this.cidade = cidade;
+    }
+    
     public Long getId_pessoa() {
         return id_pessoa;
     }
