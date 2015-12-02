@@ -6,7 +6,7 @@
 package br.com.clinica.dao;
 
 import java.util.List;
-import modelo.Pessoa;
+import br.com.clinica.model.Pessoa;
 
 /**
  *

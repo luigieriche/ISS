@@ -1,4 +1,4 @@
-package util;
+package br.com.clinica.util;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

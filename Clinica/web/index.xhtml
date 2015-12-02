@@ -2,35 +2,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
- <h:head>
- <title>Cadastro</title>
- </h:head>
- <h:body>
- <h:form>
- <h:panelGrid columns="3">
- <h:outputLabel value="Nome:"/>
- <h:inputText id="nome"  size="20" />
- <h:message for="nome" />
+    
+    <h:head>
+        <title> Clinica </title>
+    </h:head>
+    <h:body>
+        <center><h1>Sistema Clinica</h1></center>
+        <h:form>
+            <h:outputText value="Nome: "/>
+            <h:outputText id="nome" value="#{pessoaController.pessoa.nome}" /><br/>
+            <h:outputText value="Email: "/>
+            <h:outputText id="nome" value="#{pessoaController.pessoa.email}" /><br/>
+            <h:outputText value="Celular: "/>
+            <h:outputText id="nome" value="#{pessoaController.pessoa.celular}" /><br/>
+            <h:outputText value="Telefone: "/>
+            <h:outputText id="nome" value="#{pessoaController.pessoa.telefone}" /><br/>
+            <h:outputText value="Data de Nascimento: "/>
+            <h:outputText id="nome" value="#{pessoaController.pessoa.data_nascimento}" /><br/>
+            <h:outputText value="Sexo: "/>
+            <h:outputText id="nome" value="#{pessoaController.pessoa.sexo}" /><br/>
+            <h:outputText value="CPF: "/>
+            <h:outputText id="nome" value="#{pessoaController.pessoa.cpf}" /><br/>
+            <h:outputText value="Cidade: "/>
+            <h:outputText id="nome" value="#{pessoaController.pessoa.cidade}" /><br/>
+            <h:outputText value="Endereco: "/>
+            <h:outputText id="nome" value="teste" /><br/>
+            <h:outputText value="Número: "/>
+            <h:outputText id="nome" value="#{pessoaController.pessoa.numero}" /><br/>
+            
+            <h:commandButton value="Salvar" id="salva" actionListener="#{pessoaController.adicionar(actionEvent)}" />
+        </h:form>
+    </h:body>
+    
 
- <h:outputLabel value="Endereçoo:"/>
- <h:inputText id="end"  size="20"  />
- <h:message for="end" />
- <br/>
-
- <h:outputLabel value="Número:"/>
- <h:inputText id="nro"  size="20" />
- <h:message for="nro" />
-
- <h:outputLabel value="Telefone:"/>
- <h:inputText id="tel"  size="20" />
- <h:message for="tel" />
-
- <h:outputLabel value="Cidade:"/>
- <h:inputText id="mun"  size="20" />
- <h:message for="mun" />
-
- <h:commandButton id="btnE" value="Enviar" />
- <h:commandButton id="btnL" value="Limpar"/>
 
  </h:panelGrid>
  </h:form>

@@ -5,9 +5,9 @@
  */
 package br.com.clinica.dao;
 
-import util.HibernateUtil;
+import br.com.clinica.util.HibernateUtil;
 import java.util.List;
-import modelo.Pessoa;
+import br.com.clinica.model.Pessoa;
 import org.hibernate.Session;
 
 /**

@@ -12,7 +12,7 @@ import br.com.clinica.dao.InterfacePessoa;
 import br.com.clinica.dao.PessoaDao;
 import java.util.List;
 import javax.swing.JOptionPane;
-import modelo.Pessoa;
+import br.com.clinica.model.Pessoa;
 
 /**
  *
@@ -23,15 +23,4 @@ public class teste {
     //private Session sessao;
     //private Transaction trans;
     
-    public static void main(String[]args){
-   
-        List<Pessoa> lista = new PessoaDao().list();
-        String rec = "";
-        for (Pessoa pessoa : lista){
-            rec = rec + "\n Nome: " + pessoa.getNome() + " Email " + pessoa.getEmail() + " Telefone " + 
-                    pessoa.getCelular();
-        }
-        JOptionPane.showMessageDialog(null, rec);
-
-    }
 }
