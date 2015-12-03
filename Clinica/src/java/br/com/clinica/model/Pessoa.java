@@ -22,19 +22,20 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_pessoa;
     private String nome;
+    private String data_nascimento;
     private String email;
     private String celular;
     private String telefone;
-    private String data_nascimento;
     private String sexo;
     private String cpf;
-    private String numero;
     private String cidade;
+    private String endereco;
+    private String numero;
 
     public Pessoa() {
     }
 
-    public Pessoa(Long id_pessoa, String nome, String email, String celular, String telefone, String data_nascimento, String sexo, String cpf, String numero, String cidade) {
+    public Pessoa(Long id_pessoa, String nome, String email, String celular, String telefone, String data_nascimento, String sexo, String cpf, String numero, String cidade, String endereco) {
         this.id_pessoa = id_pessoa;
         this.nome = nome;
         this.email = email;
@@ -43,8 +44,18 @@ public class Pessoa implements Serializable {
         this.data_nascimento = data_nascimento;
         this.sexo = sexo;
         this.cpf = cpf;
-        this.numero = numero;
         this.cidade = cidade;
+        this.endereco = endereco;
+        this.numero = numero;
+        
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
     
     public Long getId_pessoa() {

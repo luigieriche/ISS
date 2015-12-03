@@ -2,102 +2,114 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     
     <h:head>
-        <title> Clinica </title>
+      <title> Clinica </title>
     </h:head>
     <h:body>
+        
+    <ui:include src="/menu.xhtml" />    
+      
+
         <center><h1>Sistema Clinica</h1></center>
-        <h:form>
-            
+        <h:form>    
             <h:outputText value="Nome: "/>
-            <h:inputText id="nome" value="#{pessoaController.pessoa.nome}" /><br/>
+            <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" /><br/>
             <h:outputText value="Email: "/>
-            <h:inputText id="email" value="#{pessoaController.pessoa.email}" /><br/>
+            <p:inputText id="email" value="#{pessoaController.pessoa.email}" /><br/>
             <h:outputText value="Celular: "/>
-            <h:inputText id="celular" value="#{pessoaController.pessoa.celular}" /><br/>
+            <p:inputText id="celular" value="#{pessoaController.pessoa.celular}" /><br/>
             <h:outputText value="Telefone: "/>
-            <h:inputText id="telefone" value="#{pessoaController.pessoa.telefone}" /><br/>
+            <p:inputText id="telefone" value="#{pessoaController.pessoa.telefone}" /><br/>
             <h:outputText value="Data de Nascimento: "/>
-            <h:inputText id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" /><br/>
+            <p:inputText id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" /><br/>
             <h:outputText value="Sexo: "/>
-            <h:inputText id="sexo" value="#{pessoaController.pessoa.sexo}" /><br/>
+            <p:inputText id="sexo" value="#{pessoaController.pessoa.sexo}" /><br/>
             <h:outputText value="CPF: "/>
-            <h:inputText id="cpf" value="#{pessoaController.pessoa.cpf}" /><br/>
+            <p:inputText id="cpf" value="#{pessoaController.pessoa.cpf}" /><br/>
             <h:outputText value="Cidade: "/>
-            <h:inputText id="cidade" value="#{pessoaController.pessoa.cidade}" /><br/>
+            <p:inputText id="cidade" value="#{pessoaController.pessoa.cidade}" /><br/>
             <h:outputText value="Endereco: "/>
-            <h:inputText id="endereco" value="teste" /><br/>
+            <p:inputText id="endereco" value="#{pessoaController.pessoa.endereco}" /><br/>
             <h:outputText value="Número: "/>
-            <h:inputText id="numero" value="#{pessoaController.pessoa.numero}" /><br/>
+            <p:inputText id="numero" value="#{pessoaController.pessoa.numero}" /><br/>
             
-            <h:commandButton value="Salvar" id="salva" actionListener="#{pessoaController.adicionar(actionEvent)}" />
+            <p:commandButton value="Salvar" id="salva" actionListener="#{pessoaController.adicionar(actionEvent)}" />
         </h:form>
         
-        <h:dataTable value="#{pessoaController.listaPessoas}" var="pessoa">
-            <h:column>
+        <p:dataTable value="#{pessoaController.listaPessoas}" var="pessoa">
+            <p:column>
                 <f:facet name="header">
                     <h:outputText value="nome"/>
                 </f:facet>
                 <h:outputText value="#{pessoa.nome}"/>
-            </h:column>
+            </p:column>
             
-             <h:column>
+             <p:column>
                 <f:facet name="header">
                     <h:outputText value="E-mail"/>
                 </f:facet>
                 <h:outputText value="#{pessoa.email}"/>
-            </h:column>
+            </p:column>
             
-             <h:column>
+             <p:column>
                 <f:facet name="header">
                     <h:outputText value="Telefone"/>
                 </f:facet>
                 <h:outputText value="#{pessoa.telefone}"/>
-            </h:column>
+            </p:column>
             
-             <h:column>
+             <p:column>
                 <f:facet name="header">
                     <h:outputText value="Celular"/>
                 </f:facet>
                 <h:outputText value="#{pessoa.celular}"/>
-            </h:column>
+            </p:column>
             
-             <h:column>
+             <p:column>
                 <f:facet name="header">
                     <h:outputText value="Data de Nascimento"/>
                 </f:facet>
                  <h:outputText value="#{pessoa.data_nascimento}"/>
-            </h:column>
+            </p:column>
             
-             <h:column>
+             <p:column>
                 <f:facet name="header">
                     <h:outputText value="Sexo"/>
                 </f:facet>
                 <h:outputText value="#{pessoa.sexo}"/>
-            </h:column>
+            </p:column>
             
-             <h:column>
+             <p:column>
                 <f:facet name="header">
                     <h:outputText value="CPF"/>
                 </f:facet>
                 <h:outputText value="#{pessoa.cpf}"/>
-            </h:column>
+            </p:column>
             
-             <h:column>
+             <p:column>
                 <f:facet name="header">
                     <h:outputText value="Cidade"/>
                 </f:facet>
                 <h:outputText value="#{pessoa.cidade}"/>
-            </h:column>
+            </p:column>
             
-             <h:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Endereco"/>
+                </f:facet>
+                <h:outputText value="#{pessoa.endereco}"/>
+            </p:column>
+            
+             <p:column>
                 <f:facet name="header">
                     <h:outputText value="numero"/>
                 </f:facet>
                 <h:outputText value="#{pessoa.numero}"/>
-            </h:column>
-        </h:dataTable>
+            </p:column>
+        </p:dataTable>
     </h:body>
 </html>

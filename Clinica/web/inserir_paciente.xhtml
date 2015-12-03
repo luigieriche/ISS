@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+      <title> Clinica </title>
+    </h:head>
+    <h:body>
+        
+    <ui:include src="/menu.xhtml" />    
+      <h:form>    
+            <h:outputText value="Nome: "/>
+            <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" /><br/>
+            <h:outputText value="Email: "/>
+            <p:inputText id="email" value="#{pessoaController.pessoa.email}" /><br/>
+            <h:outputText value="Celular: "/>
+            <p:inputText id="celular" value="#{pessoaController.pessoa.celular}" /><br/>
+            <h:outputText value="Telefone: "/>
+            <p:inputText id="telefone" value="#{pessoaController.pessoa.telefone}" /><br/>
+            <h:outputText value="Data de Nascimento: "/>
+            <p:inputText id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" /><br/>
+            <h:outputText value="Sexo: "/>
+            <p:inputText id="sexo" value="#{pessoaController.pessoa.sexo}" /><br/>
+            <h:outputText value="CPF: "/>
+            <p:inputText id="cpf" value="#{pessoaController.pessoa.cpf}" /><br/>
+            <h:outputText value="Cidade: "/>
+            <p:inputText id="cidade" value="#{pessoaController.pessoa.cidade}" /><br/>
+            <h:outputText value="Endereco: "/>
+            <p:inputText id="endereco" value="#{pessoaController.pessoa.endereco}" /><br/>
+            <h:outputText value="Número: "/>
+            <p:inputText id="numero" value="#{pessoaController.pessoa.numero}" /><br/>
+            
+            <p:commandButton value="Salvar" id="salva" actionListener="#{pessoaController.adicionar(actionEvent)}" />
+        </h:form>
+    </h:body>
+</html>
