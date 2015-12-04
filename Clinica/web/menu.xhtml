@@ -1,23 +1,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
+    <p:layout fullPage="true">
     <h:form style="width:100%;">
         <p:menubar>
-            <p:submenu label="Pacientes">
-                <p:menuitem value="Novo" url="inserir_paciente.xhtml"></p:menuitem>
-                <p:menuitem value="Listar"></p:menuitem>
-            </p:submenu>
-            <p:submenu label="Consultas">
-                 <p:menuitem value="Nova"></p:menuitem>
-                <p:menuitem value="Listar"></p:menuitem>
-            </p:submenu>
-            <p:submenu label="Usuários">
-                 <p:menuitem value="Novo"></p:menuitem>
-                <p:menuitem value="Listar"></p:menuitem>
-            </p:submenu>
+            <p:menuitem value="Pacientes" url="#" icon="ui-icon-plusthick" />
+            <p:menuitem value="Consultas" url="#" icon="ui-icon-plusthick" />
+            <p:menuitem value="Usuários" url="#" icon="ui-icon-plusthick" />
             <p:menuitem value="Ajuda" url="#" icon="ui-icon-help" />
             <p:menuitem value="Sair" url="#" icon="ui-icon-close" />
-
         </p:menubar>
     </h:form>
+    </p:layout>
 </html>

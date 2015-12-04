@@ -28,6 +28,7 @@ public class PessoaDao implements InterfacePessoa{
         ss.beginTransaction();
         ss.save(pessoa);
         ss.getTransaction().commit();
+        pessoa = new Pessoa();
         //ss.close();
         
     }
