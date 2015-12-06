@@ -7,7 +7,7 @@ package br.com.clinica.model;
 
 /**
  *
- * @author luiz.ferreira
+ * @author felippefernandes
  */
 public class paciente_ { 
     
