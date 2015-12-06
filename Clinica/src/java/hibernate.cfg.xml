@@ -13,5 +13,7 @@
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <mapping class="br.com.clinica.model.Pessoa"/>
+    <mapping class="br.com.clinica.model.Consulta"/>
+    <mapping class="br.com.clinica.model.Usuario"/>
   </session-factory>
 </hibernate-configuration>

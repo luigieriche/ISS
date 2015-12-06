@@ -12,7 +12,7 @@ import org.hibernate.Session;
 
 /**
  *
- * @author luiz.ferreira
+ * @author luiz.davantel
  */
 public class PessoaDao implements InterfacePessoa{
 

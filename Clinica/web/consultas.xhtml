@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title> Clinica </title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="center">
+                <ui:include src="/menu.xhtml" />
+                <center><h1>Consultas</h1></center>
+
+                <!-- Incluir -->
+                <p:layoutUnit position="center">
+                    <p:dialog widgetVar="dlgConsulta" resizable="false" header="400" width="600">
+                        <h:form>
+                            <p:panelGrid columns="2">
+                                <h:outputText value="Id Paciente "/>
+                                <p:inputText id="id_paciente" value="#{consultaController.consulta.id_paciente}" />
+                                <h:outputText value="Id Usuario "/>
+                                <p:inputText id="id_usuario" value="#{consultaController.consulta.id_usuario}" />
+                                <h:outputText value="Data "/>
+                                <p:inputText id="data_consulta" value="#{consultaController.consulta.data_consulta}" />
+                                <h:outputText value="Sintomas "/>
+                                <p:inputText id="sintomas" value="#{consultaController.consulta.sintomas}" />
+                                <h:outputText value="Disnostico "/>
+                                <p:inputText id="disnostico" value="#{consultaController.consulta.diagnostico}" />
+                                <h:outputText value="Receita "/>
+                                <p:inputText id="receita" value="#{consultaController.consulta.receita}" />
+                                <h:outputText value="Status "/>
+                                <p:inputText id="status" value="#{consultaController.consulta.status}" />
+                                
+                                <br />
+                                <p:commandButton value="Salvar" id="salva" actionListener="#{consultaController.adicionar(actionEvent)}" 
+                                                 onclick="PF('consulta').show()" oncomplete="PF('dlgConsulta').hide()"/>
+                            </p:panelGrid>
+                        </h:form>
+                    </p:dialog>
+                </p:layoutUnit>
+                
+                <p:dataTable id="consulta" value="#{consultaController.listaConsulta}" var="consulta">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID"/>
+                            </f:facet>
+                            <h:outputText value="#{consulta.id_consulta}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id Paciente"/>
+                            </f:facet>
+                            <h:outputText value="#{consulta.id_paciente}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id Usuario"/>
+                            </f:facet>
+                            <h:outputText value="#{consulta.id_usuario}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Data"/>
+                            </f:facet>
+                            <h:outputText value="#{consulta.data_consulta}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Sintomas"/>
+                            </f:facet>
+                            <h:outputText value="#{consulta.sintomas}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Diagnostico"/>
+                            </f:facet>
+                            <h:outputText value="#{consulta.diagnostico}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Receita"/>
+                            </f:facet>
+                            <h:outputText value="#{consulta.receita}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Status"/>
+                            </f:facet>
+                            <h:outputText value="#{consulta.status}"/>
+                        </p:column>
+
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Opções"/>
+                            </f:facet>
+                            <p:commandButton value="Excluir" id="exclui" action="#{consultaController.excluir()}" 
+                                             onclick="if (!confirm('Deseja excluir o contato #{consulta.id_consulta}?'))
+                                                 return false;" oncomplete="PF('consulta').show()" />
+                                
+                            <p:commandButton value="Alterar" actionListener="#{pessoaController.prepararAlterarPessoa(actionEvent)}" 
+                                             onclick="PF('dlgAlteraPaciente').show()"/>
+                        </p:column>
+                        
+                    </p:dataTable>
+           
+                <br></br>
+                
+<p:commandButton value="Adicionar" actionListener="#{consultaController.prepararAdicionarConsulta(actionEvent)}" 
+                                 onclick="PF('dlgConsulta').show()"/>
+
+                 </p:layoutUnit>
+              
+               
+
+
+
+        </p:layout>
+    </h:body>
+</html>
