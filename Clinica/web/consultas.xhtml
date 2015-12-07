@@ -43,6 +43,34 @@
                     </p:dialog>
                 </p:layoutUnit>
                 
+                 <!-- Alterar -->
+                <p:layoutUnit position="center">
+                    <p:dialog widgetVar="dlgAlteraConsulta" resizable="false" header="400" width="600">
+                        <h:form>
+                           <p:panelGrid columns="2">
+                                <h:outputText value="Id Paciente "/>
+                                <p:inputText id="id_paciente" value="#{consultaController.consulta.id_paciente}" />
+                                <h:outputText value="Id Usuario "/>
+                                <p:inputText id="id_usuario" value="#{consultaController.consulta.id_usuario}" />
+                                <h:outputText value="Data "/>
+                                <p:inputText id="data_consulta" value="#{consultaController.consulta.data_consulta}" />
+                                <h:outputText value="Sintomas "/>
+                                <p:inputText id="sintomas" value="#{consultaController.consulta.sintomas}" />
+                                <h:outputText value="Disnostico "/>
+                                <p:inputText id="disnostico" value="#{consultaController.consulta.diagnostico}" />
+                                <h:outputText value="Receita "/>
+                                <p:inputText id="receita" value="#{consultaController.consulta.receita}" />
+                                <h:outputText value="Status "/>
+                                <p:inputText id="status" value="#{consultaController.consulta.status}" />
+                                <br />
+                                <p:commandButton value="Alterar" id="salva" actionListener="#{consultaController.alterar(actionEvent)}" 
+                                                 onclick="PF('consulta').show();" oncomplete="PF('dlgAlteraConsulta').hide()"/>
+
+                            </p:panelGrid>
+                        </h:form>
+                    </p:dialog>
+                </p:layoutUnit>
+                
                 <p:dataTable id="consulta" value="#{consultaController.listaConsulta}" var="consulta">
                         <p:column>
                             <f:facet name="header">
@@ -108,8 +136,8 @@
                                              onclick="if (!confirm('Deseja excluir o contato #{consulta.id_consulta}?'))
                                                  return false;" oncomplete="PF('consulta').show()" />
                                 
-                            <p:commandButton value="Alterar" actionListener="#{pessoaController.prepararAlterarPessoa(actionEvent)}" 
-                                             onclick="PF('dlgAlteraPaciente').show()"/>
+                            <p:commandButton value="Alterar" actionListener="#{pessoaController.prepararAlterarConsulta(actionEvent)}" 
+                                             onclick="PF('dlgAlteraConsulta').show()"/>
                         </p:column>
                         
                     </p:dataTable>

@@ -49,7 +49,7 @@ public class ConsultaDao{
         ss.beginTransaction();
         ss.update(consulta);
         ss.getTransaction().commit();
-       // ss.close();
+        //ss.close();
     }
 
     
