@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title> Clinica </title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="center">
+                <ui:include src="/menu.xhtml" />
+                <center><h1>Pacientes</h1></center>
+
+                <!-- Incluir -->
+                <p:layoutUnit position="center">
+                    <p:dialog widgetVar="dlgPaciente" resizable="false" header="400" width="600">
+                        <h:form>
+                            <p:panelGrid columns="2">
+                                <h:outputText value="Nome: "/>
+                                <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" />
+                                <h:outputText value="Email: "/>
+                                <p:inputText id="email" value="#{pessoaController.pessoa.email}" />
+                                <h:outputText value="Celular: "/>
+                                <p:inputText id="celular" value="#{pessoaController.pessoa.celular}" />
+                                <h:outputText value="Telefone: "/>
+                                <p:inputText id="telefone" value="#{pessoaController.pessoa.telefone}" />
+                                <h:outputText value="Data de Nascimento: "/>
+                                <p:inputText id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" />
+                                <h:outputText value="Sexo: "/>
+                                <p:inputText id="sexo" value="#{pessoaController.pessoa.sexo}" />
+                                <h:outputText value="CPF: "/>
+                                <p:inputText id="cpf" value="#{pessoaController.pessoa.cpf}" />
+                                <h:outputText value="Cidade: "/>
+                                <p:inputText id="cidade" value="#{pessoaController.pessoa.cidade}" />
+                                <h:outputText value="Endereco: "/>
+                                <p:inputText id="endereco" value="#{pessoaController.pessoa.endereco}" />
+                                <h:outputText value="Número: "/>
+                                <p:inputText id="numero" value="#{pessoaController.pessoa.numero}" />
+                                <br />
+                                <p:commandButton value="Salvar" id="salva" actionListener="#{pessoaController.adicionar(actionEvent)}" 
+                                                 onclick="PF('pessoa').show()" oncomplete="PF('dlgPessoa').hide()"/>
+                            </p:panelGrid>
+                        </h:form>
+                    </p:dialog>
+                </p:layoutUnit>
+
+                <!-- Alterar -->
+                <p:layoutUnit position="center">
+                    <p:dialog widgetVar="dlgAlteraPaciente" resizable="false" header="400" width="600">
+                        <h:form>
+                            <p:panelGrid columns="2">
+                                <h:outputText value="Nome: "/>
+                                <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" />
+                                <h:outputText value="Email: "/>
+                                <p:inputText id="email" value="#{pessoaController.pessoa.email}" />
+                                <h:outputText value="Celular: "/>
+                                <p:inputText id="celular" value="#{pessoaController.pessoa.celular}" />
+                                <h:outputText value="Telefone: "/>
+                                <p:inputText id="telefone" value="#{pessoaController.pessoa.telefone}" />
+                                <h:outputText value="Data de Nascimento: "/>
+                                <p:inputText id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" />
+                                <h:outputText value="Sexo: "/>
+                                <p:inputText id="sexo" value="#{pessoaController.pessoa.sexo}" />
+                                <h:outputText value="CPF: "/>
+                                <p:inputText id="cpf" value="#{pessoaController.pessoa.cpf}" />
+                                <h:outputText value="Cidade: "/>
+                                <p:inputText id="cidade" value="#{pessoaController.pessoa.cidade}" />
+                                <h:outputText value="Endereco: "/>
+                                <p:inputText id="endereco" value="#{pessoaController.pessoa.endereco}" />
+                                <h:outputText value="Número: "/>
+                                <p:inputText id="numero" value="#{pessoaController.pessoa.numero}" />
+                                <br />
+                                <p:commandButton value="Alterar" id="salva" actionListener="#{pessoaController.alterar(actionEvent)}" 
+                                                 onclick="PF('pessoa').show();" oncomplete="PF('dlgAlteraPessoa').hide()"/>
+
+                            </p:panelGrid>
+                        </h:form>
+                    </p:dialog>
+                </p:layoutUnit>
+
+              
+                <p:dataTable id="pessoa" value="#{pessoaController.listaPessoas}" var="pessoa">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="nome"/>
+                            </f:facet>
+                            <h:outputText value="#{pessoa.nome}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="E-mail"/>
+                            </f:facet>
+                            <h:outputText value="#{pessoa.email}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Telefone"/>
+                            </f:facet>
+                            <h:outputText value="#{pessoa.telefone}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Celular"/>
+                            </f:facet>
+                            <h:outputText value="#{pessoa.celular}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Data de Nascimento"/>
+                            </f:facet>
+                            <h:outputText value="#{pessoa.data_nascimento}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Sexo"/>
+                            </f:facet>
+                            <h:outputText value="#{pessoa.sexo}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="CPF"/>
+                            </f:facet>
+                            <h:outputText value="#{pessoa.cpf}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cidade"/>
+                            </f:facet>
+                            <h:outputText value="#{pessoa.cidade}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Endereco"/>
+                            </f:facet>
+                            <h:outputText value="#{pessoa.endereco}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="numero"/>
+                            </f:facet>
+                            <h:outputText value="#{pessoa.numero}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Opções"/>
+                            </f:facet>
+                            <p:commandButton value="Excluir" action="#{pessoaController.excluir()}" 
+                                             onclick="if (!confirm('Deseja excluir o contato #{pessoa.nome}?'))
+                                                 return false;" oncomplete="PF('pessoa').show();" />
+                                
+                            <p:commandButton value="Alterar" actionListener="#{pessoaController.prepararAlterarPessoa(actionEvent)}" 
+                                             onclick="PF('dlgAlteraPaciente').show()"/>
+                        </p:column>
+                    </p:dataTable>
+           
+                <br></br>
+
+                <p:commandButton value="Adicionar" actionListener="#{pessoaController.prepararAdicionarPessoa(actionEvent)}" 
+                                 onclick="PF('dlgPaciente').show()"/>
+
+            </p:layoutUnit>
+
+
+
+        </p:layout>
+    </h:body>
+</html>

@@ -23,8 +23,25 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int id_pessoa;
-    private String login;
+    private String usuario;
+    private String senha;
     private String tipo;
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
     public int getId_pessoa() {
         return id_pessoa;
@@ -32,14 +49,6 @@ public class Usuario implements Serializable {
 
     public void setId_pessoa(int id_pessoa) {
         this.id_pessoa = id_pessoa;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getTipo() {
