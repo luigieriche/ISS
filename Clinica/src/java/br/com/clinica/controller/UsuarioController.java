@@ -26,6 +26,7 @@ public class UsuarioController implements Serializable{
     
     private Usuario usuario;
     private DataModel listaUsuario;
+
     
     public Usuario getUsuario() {
       if (this.usuario == null){
@@ -38,5 +39,21 @@ public class UsuarioController implements Serializable{
         List<Usuario> lista = new UsuarioDao().list();
         listaUsuario = new ListDataModel(lista);
         return listaUsuario;
+    }
+    
+    public String ValidaUsuairo(){
+        Usuario validador = new Usuario();
+     
+          List<Usuario> lista = new UsuarioDao().list();
+        int encontrou = -1;
+          
+        for (int i=0;i<lista.size();i++){
+            validador = lista.get(i);
+            
+            if (validador.getUsuario().equals(usuario.getUsuario()) && validador.getSenha().equals(usuario.getSenha()))                  
+             encontrou = i;
+        }
+        
+       return "menu";
     }
 }

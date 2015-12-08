@@ -16,11 +16,11 @@
                     <h:form>
                         <p:panelGrid columns="2">
                             <h:outputText value="Usuário: "/>
-                            <p:inputText id="usuario" value=" " />
+                            <p:inputText id="usuario" value="#{usuarioController.usuario.usuario}" />
                             <h:outputText value="Email: "/>
-                            <p:inputText id="senha" value="" />
+                            <p:inputText id="senha" value="#{usuarioController.usuario.senha}" />
                             <h:outputText value="Senha: "/>
-                            <p:commandButton value="Entrar" id="salva" actionListener="#{consultaController.adicionar(actionEvent)}"/>
+                            <p:commandButton value="Entrar" id="salva" action="menu"/>
                         </p:panelGrid>
                     </h:form>
             </p:layoutUnit>

@@ -22,9 +22,9 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int id_pessoa;
     private String usuario;
     private String senha;
+    private int id_pessoa;
     private String tipo;
 
     public String getUsuario() {
