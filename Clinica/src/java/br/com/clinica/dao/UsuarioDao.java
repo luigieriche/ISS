@@ -7,7 +7,8 @@ package br.com.clinica.dao;
 
 import br.com.clinica.util.HibernateUtil;
 import java.util.List;
-import br.com.clinica.model.Pessoa;
+
+import br.com.clinica.model.Usuario;
 import org.hibernate.Session;
 
 /**
@@ -16,8 +17,7 @@ import org.hibernate.Session;
  */
 public class UsuarioDao{
 
-    @Override
-    public List<Pessoa> list() {
+    public List<Usuario> list() {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         ss.beginTransaction();
         List lista = ss.createQuery("From usuario ").list();

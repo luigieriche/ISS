@@ -7,7 +7,6 @@ package br.com.clinica.controller;
 
 
 import br.com.clinica.dao.UsuarioDao;
-import br.com.clinica.model.Pessoa;
 import br.com.clinica.model.Usuario;
 import java.io.Serializable;
 import java.util.List;
@@ -36,7 +35,7 @@ public class UsuarioController implements Serializable{
     }
     
     public DataModel getListaUsuario() {
-        List<usuario> lista = new UsuarioDao().list();
+        List<Usuario> lista = new UsuarioDao().list();
         listaUsuario = new ListDataModel(lista);
         return listaUsuario;
     }
