@@ -17,33 +17,50 @@
 
                 <!-- Incluir -->
                 <p:layoutUnit position="center">
-                    <p:dialog widgetVar="dlgPaciente" resizable="false" header="400" width="600">
+                    <p:dialog widgetVar="dlgPaciente" resizable="false" header="Adicionar Paciente">
                         <h:form>
-                            <p:panelGrid columns="2">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                
                                 <h:outputText value="Nome: "/>
-                                <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" />
+                                <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" required="true" />
+                                
                                 <h:outputText value="Email: "/>
                                 <p:inputText id="email" value="#{pessoaController.pessoa.email}" />
+                                
                                 <h:outputText value="Celular: "/>
                                 <p:inputText id="celular" value="#{pessoaController.pessoa.celular}" />
-                                <h:outputText value="Telefone: "/>
-                                <p:inputText id="telefone" value="#{pessoaController.pessoa.telefone}" />
-                                <h:outputText value="Data de Nascimento: "/>
-                                <p:inputText id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" />
+                                
+                                <h:outputLabel for="telefone" value="Telefone: "/>
+                                <p:inputMask id="telefone" value="#{pessoaController.pessoa.telefone}" mask="(99) 9999-9999"/>
+                                
+                                <h:outputLabel for="data_nascimento" value="Data de Nascimento: "/>
+                                <p:inputMask id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" mask="99/99/9999"/>
+                                
                                 <h:outputText value="Sexo: "/>
                                 <p:inputText id="sexo" value="#{pessoaController.pessoa.sexo}" />
-                                <h:outputText value="CPF: "/>
-                                <p:inputText id="cpf" value="#{pessoaController.pessoa.cpf}" />
+                                
+                                <h:outputLabel for="key" value="CPF: "/>
+                                <p:inputMask id="cpf" value="#{pessoaController.pessoa.cpf}" mask="999.999.999-99"/>
+                                
                                 <h:outputText value="Cidade: "/>
                                 <p:inputText id="cidade" value="#{pessoaController.pessoa.cidade}" />
+                                
                                 <h:outputText value="Endereco: "/>
                                 <p:inputText id="endereco" value="#{pessoaController.pessoa.endereco}" />
+                                
                                 <h:outputText value="Número: "/>
                                 <p:inputText id="numero" value="#{pessoaController.pessoa.numero}" />
-                                <br />
+    
+                            </h:panelGrid>
+                            <br />
+                            <h:panelGroup style="white-space: nowrap">
                                 <p:commandButton value="Salvar" id="salva" actionListener="#{pessoaController.adicionar(actionEvent)}" 
-                                                 onclick="PF('pessoa').show()" oncomplete="PF('dlgPessoa').hide()"/>
-                            </p:panelGrid>
+                                                     onclick="PF('pessoa').show()" oncomplete="PF('dlgPessoa').hide()" icon="ui-icon-check"/>
+
+                                <p:commandButton value="Limpar" type="reset" />
+
+                                <p:commandButton value="Cancelar" type="reset" onclick="PF('dlgPaciente').hide()" />   
+                            </h:panelGroup>
                         </h:form>
                     </p:dialog>
                 </p:layoutUnit>
