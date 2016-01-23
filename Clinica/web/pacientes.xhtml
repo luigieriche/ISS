@@ -15,6 +15,18 @@
             <p:layoutUnit position="center">
                 <ui:include src="/menu.xhtml" />
                 <center><h1>Pacientes</h1></center>
+                
+                <!-- Buscar -->
+                
+                    <h:form id="buscaPaciente">
+                          <h:outputText value="Pesquisar paciente:"/>
+                          <p:inputText id="textBusca" required="true" />
+                          
+                          <h:commandButton value="Buscar" id="cmdBusca" >
+                               <f:ajax execute="@all" render=":pessoa" />
+                          </h:commandButton>
+                    </h:form>
+              
 
                 <!-- Incluir -->
                 <p:layoutUnit position="center">
@@ -115,7 +127,7 @@
                 </p:layoutUnit>
 
               
-                <p:dataTable id="pessoa" value="#{pessoaController.listaPessoas}" var="pessoa">
+                <p:dataTable id="pessoa" value="#{pessoaController.buscaPessoas()}" var="pessoa">
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="nome"/>

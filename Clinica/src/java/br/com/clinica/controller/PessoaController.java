@@ -27,7 +27,9 @@ import javax.faces.model.ListDataModel;
 public class PessoaController implements Serializable{
     
     private Pessoa pessoa;
+    private String nome;
     private DataModel listaPessoa;
+    private DataModel buscaPessoa;
 
     public Pessoa getPessoa() {
         if (this.pessoa == null){
@@ -44,6 +46,12 @@ public class PessoaController implements Serializable{
         List<Pessoa> lista = new PessoaDao().list();
         listaPessoa = new ListDataModel(lista);
         return listaPessoa;
+    }
+    
+     public DataModel getBuscaPessoas() {
+        List<Pessoa> lista = new PessoaDao().busca(nome);
+        buscaPessoa = new ListDataModel(lista);
+        return buscaPessoa;
     }
     
      public void prepararAlterarPessoa(ActionEvent actionEvent){
