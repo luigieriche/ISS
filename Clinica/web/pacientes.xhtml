@@ -9,6 +9,7 @@
     <h:head>
         <title> Clinica </title>
     </h:head>
+    
     <h:body>
         <p:layout fullPage="true">
             <p:layoutUnit position="center">
@@ -18,7 +19,7 @@
                 <!-- Incluir -->
                 <p:layoutUnit position="center">
                     <p:dialog widgetVar="dlgPaciente" resizable="false" header="Adicionar Paciente">
-                        <h:form>
+                        <h:form id="adicionaPaciente">
                             <h:panelGrid columns="2" cellpadding="5">
                                 
                                 <h:outputText value="Nome: "/>
@@ -54,8 +55,10 @@
                             </h:panelGrid>
                             <br />
                             <h:panelGroup style="white-space: nowrap">
-                                <p:commandButton value="Salvar" id="salva" actionListener="#{pessoaController.adicionar(actionEvent)}" 
-                                                     onclick="PF('pessoa').show()" oncomplete="PF('dlgPessoa').hide()" icon="ui-icon-check"/>
+                                <p:commandButton value="Salvar" id="salva" action="#{pessoaController.adicionar(actionEvent)}" 
+                                                 onclick="PF('dlgPessoa').hide();">
+                                    <f:ajax execute="@form adicionaPaciente" render="@form :adicionaPessoa"/>
+                                </p:commandButton>
 
                                 <p:commandButton value="Limpar" type="reset" />
 
@@ -67,34 +70,46 @@
 
                 <!-- Alterar -->
                 <p:layoutUnit position="center">
-                    <p:dialog widgetVar="dlgAlteraPaciente" resizable="false" header="400" width="600">
-                        <h:form>
-                            <p:panelGrid columns="2">
+                    <p:dialog widgetVar="dlgAlteraPaciente" resizable="false" header="Alterar Paciente" width="600">
+                        <h:form id="alteraPaciente">
+                   
+                            <h:panelGrid columns="2" cellpadding="5" >
+                                
                                 <h:outputText value="Nome: "/>
-                                <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" />
+                                <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" required="true" />
+                                
                                 <h:outputText value="Email: "/>
                                 <p:inputText id="email" value="#{pessoaController.pessoa.email}" />
+                                
                                 <h:outputText value="Celular: "/>
                                 <p:inputText id="celular" value="#{pessoaController.pessoa.celular}" />
-                                <h:outputText value="Telefone: "/>
-                                <p:inputText id="telefone" value="#{pessoaController.pessoa.telefone}" />
-                                <h:outputText value="Data de Nascimento: "/>
-                                <p:inputText id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" />
+                                
+                                <h:outputLabel for="telefone" value="Telefone: "/>
+                                <p:inputMask id="telefone" value="#{pessoaController.pessoa.telefone}" mask="(99) 9999-9999"/>
+                                
+                                <h:outputLabel for="data_nascimento" value="Data de Nascimento: "/>
+                                <p:inputMask id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" mask="99/99/9999"/>
+                                
                                 <h:outputText value="Sexo: "/>
                                 <p:inputText id="sexo" value="#{pessoaController.pessoa.sexo}" />
-                                <h:outputText value="CPF: "/>
-                                <p:inputText id="cpf" value="#{pessoaController.pessoa.cpf}" />
+                                
+                                <h:outputLabel for="key" value="CPF: "/>
+                                <p:inputMask id="cpf" value="#{pessoaController.pessoa.cpf}" mask="999.999.999-99"/>
+                                
                                 <h:outputText value="Cidade: "/>
                                 <p:inputText id="cidade" value="#{pessoaController.pessoa.cidade}" />
+                                
                                 <h:outputText value="Endereco: "/>
                                 <p:inputText id="endereco" value="#{pessoaController.pessoa.endereco}" />
+                                
                                 <h:outputText value="Número: "/>
                                 <p:inputText id="numero" value="#{pessoaController.pessoa.numero}" />
-                                <br />
-                                <p:commandButton value="Alterar" id="salva" actionListener="#{pessoaController.alterar(actionEvent)}" 
+    
+                            </h:panelGrid>
+                            
+                             <p:commandButton value="Alterar" id="salva" actionListener="#{pessoaController.alterar(actionEvent)}" 
                                                  onclick="PF('pessoa').show();" oncomplete="PF('dlgAlteraPessoa').hide()"/>
 
-                            </p:panelGrid>
                         </h:form>
                     </p:dialog>
                 </p:layoutUnit>
@@ -174,18 +189,23 @@
                             <f:facet name="header">
                                 <h:outputText value="Opções"/>
                             </f:facet>
-                            <p:commandButton value="Excluir" action="#{pessoaController.excluir()}" 
-                                             onclick="if (!confirm('Deseja excluir o contato #{pessoa.nome}?'))
-                                                 return false;" oncomplete="PF('pessoa').show();" />
+                            <h:commandButton value="Excluir" action="#{pessoaController.excluir()}" 
+                                    onclick="if (!confirm('Confirma a exclusão ?')) return false;">    
+                                 <f:ajax execute="@all" render=":pessoa" />
+                               	
+                            </h:commandButton>
                                 
-                            <p:commandButton value="Alterar" actionListener="#{pessoaController.prepararAlterarPessoa(actionEvent)}" 
-                                             onclick="PF('dlgAlteraPaciente').show()"/>
+                                
+                            <h:commandButton value="Alterar" actionListener="#{pessoaController.prepararAlterarPessoa(actionEvent)}" 
+                                             onclick="PF('dlgAlteraPaciente').show()">
+                                 <f:ajax execute="@form" render=":alteraPaciente" />
+                        </h:commandButton>
                         </p:column>
                     </p:dataTable>
            
                 <br></br>
 
-                <p:commandButton value="Adicionar" actionListener="#{pessoaController.prepararAdicionarPessoa(actionEvent)}" 
+                <p:commandButton value="Adicionar" 
                                  onclick="PF('dlgPaciente').show()"/>
 
             </p:layoutUnit>

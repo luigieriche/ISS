@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -23,7 +23,7 @@ import javax.faces.model.ListDataModel;
  * @author luiz.ferreira
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class PessoaController implements Serializable{
     
     private Pessoa pessoa;
@@ -46,10 +46,6 @@ public class PessoaController implements Serializable{
         return listaPessoa;
     }
     
-    public void prepararAdicionarPessoa(ActionEvent actionEvent){
-        pessoa = new Pessoa();
-    }
-    
      public void prepararAlterarPessoa(ActionEvent actionEvent){
         pessoa = (Pessoa)(listaPessoa.getRowData());
     }
@@ -57,6 +53,7 @@ public class PessoaController implements Serializable{
      public void adicionar(ActionEvent actionEvent){
         InterfacePessoa dao = new PessoaDao();
         dao.salvar(pessoa);
+        this.pessoa = new Pessoa();
     }
      
       public void alterar(ActionEvent actionEvent){
@@ -64,10 +61,9 @@ public class PessoaController implements Serializable{
         dao.atualizar(pessoa);
     }
     
-      public String excluir(){
+      public void excluir(){
           Pessoa pessoa = (Pessoa)(listaPessoa.getRowData());
           InterfacePessoa dao = new PessoaDao();
           dao.remover(pessoa);
-          return "index";
       }
 }

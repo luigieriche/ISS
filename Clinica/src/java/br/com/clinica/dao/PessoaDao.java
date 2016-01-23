@@ -29,6 +29,9 @@ public class PessoaDao implements InterfacePessoa{
         ss.save(pessoa);
         ss.getTransaction().commit();
         pessoa = new Pessoa();
+        
+
+    
         //ss.close();
         
     }
@@ -39,7 +42,7 @@ public class PessoaDao implements InterfacePessoa{
         ss.beginTransaction();
         ss.delete(pessoa);
         ss.getTransaction().commit();
-        ss.close();
+        //ss.close();
     }
 
     @Override
@@ -48,7 +51,6 @@ public class PessoaDao implements InterfacePessoa{
         ss.beginTransaction();
         ss.update(pessoa);
         ss.getTransaction().commit();
-        ss.close();
     }
 
     @Override
