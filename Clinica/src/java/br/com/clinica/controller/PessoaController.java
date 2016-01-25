@@ -27,9 +27,10 @@ import javax.faces.model.ListDataModel;
 public class PessoaController implements Serializable{
     
     private Pessoa pessoa;
-    private String nome;
+    private String parametro = null;
+    private String campo = null;
     private DataModel listaPessoa;
-    private DataModel buscaPessoa;
+
 
     public Pessoa getPessoa() {
         if (this.pessoa == null){
@@ -38,6 +39,22 @@ public class PessoaController implements Serializable{
         return pessoa;
     }
 
+    public String getParametro() {
+        return parametro;
+    }
+
+    public void setParametro(String parametro) {
+        this.parametro = parametro;
+    }
+
+    public String getCampo() {
+        return campo;
+    }
+
+    public void setCampo(String campo) {
+        this.campo = campo;
+    }
+    
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
@@ -49,9 +66,14 @@ public class PessoaController implements Serializable{
     }
     
      public DataModel getBuscaPessoas() {
-        List<Pessoa> lista = new PessoaDao().busca(nome);
-        buscaPessoa = new ListDataModel(lista);
-        return buscaPessoa;
+        List<Pessoa> lista;
+        if (parametro == null || "".equals(parametro))
+            {lista = new PessoaDao().list();}
+        else
+            {lista = new PessoaDao().busca(parametro, campo);}
+        
+        listaPessoa = new ListDataModel(lista);
+        return listaPessoa;
     }
     
      public void prepararAlterarPessoa(ActionEvent actionEvent){
@@ -67,6 +89,7 @@ public class PessoaController implements Serializable{
       public void alterar(ActionEvent actionEvent){
         InterfacePessoa dao = new PessoaDao();
         dao.atualizar(pessoa);
+        this.pessoa = new Pessoa();
     }
     
       public void excluir(){

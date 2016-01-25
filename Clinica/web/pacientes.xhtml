@@ -20,7 +20,14 @@
                 
                     <h:form id="buscaPaciente">
                           <h:outputText value="Pesquisar paciente:"/>
-                          <p:inputText id="textBusca" required="true" />
+                          <p:inputText id="textBusca" value="#{pessoaController.parametro}" />
+                          
+                          <h:selectOneMenu value="#{pessoaController.campo}">
+                                <f:selectItem itemValue="nome" itemLabel="Nome" />
+                                <f:selectItem itemValue="telefone" itemLabel="Telefone" />
+                                <f:selectItem itemValue="email" itemLabel="Email" />
+                                <f:selectItem itemValue="cpf" itemLabel="CPF" />
+                          </h:selectOneMenu>
                           
                           <h:commandButton value="Buscar" id="cmdBusca" >
                                <f:ajax execute="@all" render=":pessoa" />
@@ -127,7 +134,7 @@
                 </p:layoutUnit>
 
               
-                <p:dataTable id="pessoa" value="#{pessoaController.buscaPessoas()}" var="pessoa">
+                <p:dataTable id="pessoa" value="#{pessoaController.buscaPessoas}" var="pessoa">
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="nome"/>

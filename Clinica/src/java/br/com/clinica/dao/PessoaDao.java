@@ -29,11 +29,6 @@ public class PessoaDao implements InterfacePessoa{
         ss.save(pessoa);
         ss.getTransaction().commit();
         pessoa = new Pessoa();
-        
-
-    
-        //ss.close();
-        
     }
 
     @Override
@@ -51,6 +46,7 @@ public class PessoaDao implements InterfacePessoa{
         ss.beginTransaction();
         ss.update(pessoa);
         ss.getTransaction().commit();
+        pessoa = new Pessoa();
     }
 
     @Override
@@ -62,10 +58,10 @@ public class PessoaDao implements InterfacePessoa{
         return lista;
     }
     
-    public List<Pessoa> busca(String nome) {
+    public List<Pessoa> busca(String nome, String campo) {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         ss.beginTransaction();
-        List lista = ss.createQuery("From pessoa p where p.nome = '" + nome + "'").list();
+        List lista = ss.createQuery("From pessoa p where p." + campo +" = '" + nome + "'").list();
         ss.getTransaction().commit();
         return lista;
     }
