@@ -63,7 +63,9 @@ public class PessoaDao implements InterfacePessoa{
         ss.beginTransaction();
         List lista = ss.createQuery("From pessoa p where p." + campo +" = '" + nome + "'").list();
         ss.getTransaction().commit();
+        //ss.close();
         return lista;
+        
     }
     
     

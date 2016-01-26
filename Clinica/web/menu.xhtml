@@ -1,15 +1,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
+    
+    
     <p:layout fullPage="true">
-    <h:form style="width:100%;">
-        <p:menubar>
-            <p:menuitem value="Pacientes" url="pacientes.xhtml" icon="ui-icon-plusthick" />
-            <p:menuitem value="Consultas" url="consultas.xhtml" icon="ui-icon-plusthick"/>
-            <p:menuitem value="Usuários" url="#" icon="ui-icon-plusthick" />
-            <p:menuitem value="Ajuda" url="#" icon="ui-icon-help" />
-            <p:menuitem value="Sair" url="#" icon="ui-icon-close" />
-        </p:menubar>
-    </h:form>
+
+        
+        <b:navBar brand="Consultas" brandHref="consultas.xhtml" inverse="true" fixed="top">
+            
+             <b:navbarLinks>
+                <b:navLink value="Pacientes" href="pacientes.xhtml" icon="ui-icon-plusthick"></b:navLink>
+                <b:navLink value="Usuários" href="usuarios.xhtml" icon="ui-icon-plusthick"></b:navLink>
+                <b:navLink value="Ajuda" href="ajuda.xhtml" icon="ui-icon-plusthick"></b:navLink>
+                <b:navLink value="Sair" href="#" icon="ui-icon-close"></b:navLink>
+            </b:navbarLinks>
+           
+        </b:navBar>
+        
+
     </p:layout>
 </html>
