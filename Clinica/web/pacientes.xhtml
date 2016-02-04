@@ -25,60 +25,56 @@
              
 		
                 <!-- Buscar -->
-                <div class="row" style="padding-top: 80px;">
-                <h:form id="buscaPaciente" >
-                    
-                        <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="col-md-3">
-                                        <h5>Pesquisar paciente:</h5>     
-                                    </div>
-                                    <div class="col-md-9">
-                                        <b:inputText class="form-control" id="textBusca" value="#{pessoaController.parametro}" />
-                                    </div>
-                                </div>
-                        </div>
-                        
-                        
-                        
-                        <div class="col-md-3">
-                             <div class="form-group">
-                                
-                                 <div class="col-md-5">
+               
+                <h:form id="buscaPaciente" style="padding-top: 80px;" >
+                    <b:row>
+                        <b:column medium-screen="6">
+                            <b:row>
+                                <b:column medium-screen="3">
+                                    <h4>Pesquisar paciente:</h4>
+                                     
+                                </b:column >
+                                <b:column medium-screen="7"> 
+                                    
+                                     <b:inputText class="form-control" id="textBusca" value="#{pessoaController.parametro}" />
+                                </b:column>
+                                <b:column medium-screen="2">
                                     <b:selectOneMenu value="#{pessoaController.campo}">
                                         <f:selectItem itemValue="nome" itemLabel="Nome" />
                                         <f:selectItem itemValue="telefone" itemLabel="Telefone" />
                                         <f:selectItem itemValue="email" itemLabel="Email" />
                                         <f:selectItem itemValue="cpf" itemLabel="CPF" />
                                     </b:selectOneMenu>
-                                </div>
-                           
-                                <div class="col-md-3">
+                                </b:column>
+                            </b:row>
+                        </b:column>
+                        <b:column  medium-screen="3">
+                            <b:row>
+                                <b:column  medium-screen="2">
                                     <h:commandButton class="btn btn-primary" value="Buscar" id="cmdBusca" >
                                         <f:ajax execute="@all" render=":pessoa" />
                                     </h:commandButton>
-                                </div>
-                                <div class="col-md-3">
+                                </b:column>
+                                <b:column  medium-screen="2">    
                                     <h:commandButton class="btn btn-primary" value="Limpar" type="reset">
                                         <p:resetInput target="@form" />
                                     </h:commandButton>  
-                                </div>
-                                <div class="col-md-1">
-                                   
-                                </div>
-                            </div>
-                        </div>
+                                  </b:column>  
+                                <b:column  medium-screen="8"></b:column>
+                            </b:row>
+                        </b:column> 
+                          
+                            
                         
-                        <div class="col-md-1">
-                           
-                        </div>
+                        <b:column  medium-screen="3">
+                            
+                        </b:column>
 
-                    
+                    </b:row>
 
                 </h:form>
-                    </div>
-
-
+                 
+                <h:messages />
                 <!-- Incluir -->
                 <p:layoutUnit position="center">
                     <p:dialog widgetVar="dlgPaciente" resizable="false" header="Adicionar Paciente">
@@ -98,7 +94,9 @@
                                 <p:inputMask id="telefone" value="#{pessoaController.pessoa.telefone}" mask="(99) 9999-9999"/>
 
                                 <h:outputLabel for="data_nascimento" value="Data de Nascimento: "/>
-                                <p:inputMask id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" mask="99/99/9999"/>
+                                <p:inputMask id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento.time}" mask="99/99/9999">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:inputMask>
 
                                 <h:outputText value="Sexo: "/>
                                 <p:inputText id="sexo" value="#{pessoaController.pessoa.sexo}" />
@@ -180,77 +178,77 @@
                 </p:layoutUnit>
 
 
-                <b:dataTable id="pessoa" styleClass="table table-striped table-bordered" value="#{pessoaController.buscaPessoas}" var="pessoa" >
-                    <h:column>
+                <p:dataTable id="pessoa" class="table table-bordered" value="#{pessoaController.buscaPessoas}" var="pessoa" >
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="nome"/>
                         </f:facet>
                         <h:outputText value="#{pessoa.nome}"/>
-                    </h:column>
+                    </p:column>
 
-                    <h:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="E-mail"/>
                         </f:facet>
                         <h:outputText value="#{pessoa.email}"/>
-                    </h:column>
+                    </p:column>
 
-                    <h:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Telefone"/>
                         </f:facet>
                         <h:outputText value="#{pessoa.telefone}"/>
-                    </h:column>
+                    </p:column>
 
-                    <h:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Celular"/>
                         </f:facet>
                         <h:outputText value="#{pessoa.celular}"/>
-                    </h:column>
+                    </p:column>
 
-                    <h:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Data de Nascimento"/>
                         </f:facet>
                         <h:outputText value="#{pessoa.data_nascimento}"/>
-                    </h:column>
+                    </p:column>
 
-                    <h:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Sexo"/>
                         </f:facet>
                         <h:outputText value="#{pessoa.sexo}"/>
-                    </h:column>
+                    </p:column>
 
-                    <h:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="CPF"/>
                         </f:facet>
                         <h:outputText value="#{pessoa.cpf}"/>
-                    </h:column>
+                    </p:column>
 
-                    <h:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Cidade"/>
                         </f:facet>
                         <h:outputText value="#{pessoa.cidade}"/>
-                    </h:column>
+                    </p:column>
 
-                    <h:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Endereco"/>
                         </f:facet>
                         <h:outputText value="#{pessoa.endereco}"/>
-                    </h:column>
+                    </p:column>
 
-                    <h:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="numero"/>
                         </f:facet>
                         <h:outputText value="#{pessoa.numero}"/>
-                    </h:column>
-                    <h:column>
+                    </p:column>
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Opções"/>
                         </f:facet>
@@ -260,7 +258,6 @@
                                                  onclick="if (!confirm('Confirma a exclusão ?'))
                                                              return false;">    
                                     <f:ajax execute="@all" render=":pessoa" />
-
                                 </h:commandButton>
 
 
@@ -270,8 +267,8 @@
                                 </h:commandButton>
                        
                         </h:panelGrid>
-                    </h:column>
-                </b:dataTable>
+                    </p:column>
+                </p:dataTable>
 
                 <br></br>
 

@@ -25,28 +25,63 @@ public class PessoaDao implements InterfacePessoa{
     @Override
     public void salvar(Pessoa pessoa) {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
-        ss.beginTransaction();
-        ss.save(pessoa);
-        ss.getTransaction().commit();
+
+        try {
+            ss.beginTransaction();
+            try {
+                ss.save(pessoa);
+                ss.getTransaction().commit();
+            } catch (Exception ex) {
+                // Log the exception here
+                ss.getTransaction().rollback();
+                throw ex;
+            }
+        } finally {
+            HibernateUtil.getSessionFactory().getCurrentSession().close();
+
+        }
+        
         pessoa = new Pessoa();
     }
 
     @Override
     public void remover(Pessoa pessoa) {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
-        ss.beginTransaction();
-        ss.delete(pessoa);
-        ss.getTransaction().commit();
-        //ss.close();
+        
+         try {
+            ss.beginTransaction();
+            try {
+                ss.delete(pessoa);
+                ss.getTransaction().commit();
+            } catch (Exception ex) {
+                // Log the exception here
+                ss.getTransaction().rollback();
+                throw ex;
+            }
+        } finally {
+            HibernateUtil.getSessionFactory().getCurrentSession().close();
+
+        }
     }
 
     @Override
     public void atualizar(Pessoa pessoa) {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
-        ss.beginTransaction();
-        ss.update(pessoa);
-        ss.getTransaction().commit();
-        pessoa = new Pessoa();
+        
+        try {
+            ss.beginTransaction();
+            try {
+                ss.update(pessoa);
+                ss.getTransaction().commit();
+            } catch (Exception ex) {
+                
+                ss.getTransaction().rollback();
+                throw ex;
+            }
+        } finally {
+            HibernateUtil.getSessionFactory().getCurrentSession().close();
+        }
+
     }
 
     @Override

@@ -10,6 +10,10 @@ import br.com.clinica.dao.PessoaDao;
 import br.com.clinica.model.Pessoa;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -96,5 +100,16 @@ public class PessoaController implements Serializable{
           Pessoa pessoa = (Pessoa)(listaPessoa.getRowData());
           InterfacePessoa dao = new PessoaDao();
           dao.remover(pessoa);
+      }
+      
+      public Calendar parseData(String data) throws ParseException{
+      try{
+          Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+          Calendar calendar = Calendar.getInstance();
+          calendar.setTime(date);
+          return calendar;
+      }catch (ParseException e){
+          throw new IllegalArgumentException(e);
+        }
       }
 }
