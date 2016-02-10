@@ -85,6 +85,7 @@ public class PessoaController implements Serializable{
     }
      
      public void adicionar(ActionEvent actionEvent){
+   
         InterfacePessoa dao = new PessoaDao();
         dao.salvar(pessoa);
         this.pessoa = new Pessoa();

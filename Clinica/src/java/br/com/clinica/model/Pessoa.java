@@ -7,12 +7,12 @@ package br.com.clinica.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -26,8 +26,8 @@ public class Pessoa implements Serializable {
     private Long id_pessoa;
     private String nome;
   
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar data_nascimento;
+  
+    private Date data_nascimento;
     
     private String email;
     private String celular;
@@ -41,7 +41,7 @@ public class Pessoa implements Serializable {
     public Pessoa() {
     }
 
-    public Pessoa(Long id_pessoa, String nome, String email, String celular, String telefone, Calendar data_nascimento, String sexo, String cpf, String numero, String cidade, String endereco) {
+    public Pessoa(Long id_pessoa, String nome, String email, String celular, String telefone, Date data_nascimento, String sexo, String cpf, String numero, String cidade, String endereco) {
         this.id_pessoa = id_pessoa;
         this.nome = nome;
         this.email = email;
@@ -104,11 +104,11 @@ public class Pessoa implements Serializable {
         this.telefone = telefone;
     }
 
-    public Calendar getData_nascimento() {
+    public Date getData_nascimento() {
         return data_nascimento;
     }
 
-    public void setData_nascimento(Calendar data_nascimento) {
+    public void setData_nascimento(Date data_nascimento) {
         this.data_nascimento = data_nascimento;
     }
 

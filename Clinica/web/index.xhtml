@@ -15,17 +15,19 @@
             <p:layoutUnit position="center">
                
                 <b:row>
-                    <b:column medium-screen="4"></b:column>
-                    <b:column medium-screen="4">
+                    <b:column medium-screen="5"></b:column>
+                    <b:column medium-screen="2">
                     <h:form>
                         <p:panelGrid>
+                            <br></br>
+                            <br></br>
+                            <br></br>
                              <br></br>
                              <br></br>
-                             <center><h1>Software Registra Consultas</h1></center>
-                             
+                             <center><h3>Software Registra Consultas</h3></center>
+                            
                              <br></br>
-                             <br></br>
-                             <br></br>
+ 
                              
                             <b:inputText id="usuario" value="#{usuarioController.usuario.usuario}">
                                 <f:facet name="prepend">
@@ -38,12 +40,13 @@
                                     <b:iconAwesome name="lock" />
                                 </f:facet>
                             </b:inputText>
-                           
+                             <br></br>
+                                 
                             <h:commandButton class="btn btn-primary" value="Entrar" id="salva" action="pacientes"/>
                         </p:panelGrid>
                     </h:form>
                     </b:column>
-                    <b:column medium-screen="4"></b:column>
+                    <b:column medium-screen="5"></b:column>
                 </b:row>
             </p:layoutUnit>
         </p:layout>

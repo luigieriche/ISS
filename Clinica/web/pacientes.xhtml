@@ -94,8 +94,8 @@
                                 <p:inputMask id="telefone" value="#{pessoaController.pessoa.telefone}" mask="(99) 9999-9999"/>
 
                                 <h:outputLabel for="data_nascimento" value="Data de Nascimento: "/>
-                                <p:inputMask id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento.time}" mask="99/99/9999">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                <p:inputMask id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" mask="99/99/9999">
+                                    
                                 </p:inputMask>
 
                                 <h:outputText value="Sexo: "/>
