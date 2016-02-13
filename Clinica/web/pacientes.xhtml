@@ -21,9 +21,7 @@
             <p:layoutUnit position="center">
                 <ui:include src="/menu.xhtml" />
            
-                
-             
-		
+
                 <!-- Buscar -->
                
                 <h:form id="buscaPaciente" style="padding-top: 80px;" >
@@ -83,23 +81,27 @@
 
                                 <h:outputText value="Nome: "/>
                                 <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" required="true" />
-
+                                                               
                                 <h:outputText value="Email: "/>
                                 <p:inputText id="email" value="#{pessoaController.pessoa.email}" />
 
                                 <h:outputText value="Celular: "/>
-                                <p:inputText id="celular" value="#{pessoaController.pessoa.celular}" />
+                                <p:inputMask id="celular" value="#{pessoaController.pessoa.celular}" mask="(99) 9999-9999"/>
 
                                 <h:outputLabel for="telefone" value="Telefone: "/>
                                 <p:inputMask id="telefone" value="#{pessoaController.pessoa.telefone}" mask="(99) 9999-9999"/>
 
                                 <h:outputLabel for="data_nascimento" value="Data de Nascimento: "/>
-                                <p:inputMask id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" mask="99/99/9999">
-                                    
+                                <p:inputMask id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" mask="99-99-9999">
+                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
                                 </p:inputMask>
 
                                 <h:outputText value="Sexo: "/>
-                                <p:inputText id="sexo" value="#{pessoaController.pessoa.sexo}" />
+                                <h:selectOneMenu value="#{pessoaController.pessoa.sexo}">
+                                      <f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+                                      <f:selectItem itemValue="Feminino" itemLabel="Faminino" />
+                                </h:selectOneMenu>
+                                
 
                                 <h:outputLabel for="key" value="CPF: "/>
                                 <p:inputMask id="cpf" value="#{pessoaController.pessoa.cpf}" mask="999.999.999-99"/>
@@ -145,16 +147,21 @@
                                 <p:inputText id="email" value="#{pessoaController.pessoa.email}" />
 
                                 <h:outputText value="Celular: "/>
-                                <p:inputText id="celular" value="#{pessoaController.pessoa.celular}" />
+                                <p:inputMask id="celular" value="#{pessoaController.pessoa.celular}" mask="(99) 9999-9999"/>
 
                                 <h:outputLabel for="telefone" value="Telefone: "/>
                                 <p:inputMask id="telefone" value="#{pessoaController.pessoa.telefone}" mask="(99) 9999-9999"/>
 
-                                <h:outputLabel for="data_nascimento" value="Data de Nascimento: "/>
-                                <p:inputMask id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" mask="99/99/9999"/>
+                                <h:outputLabel for="data_nascimento" value="Data de Nascimento: "/>                              
+                                 <p:inputMask id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" mask="99-99-9999">
+                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                </p:inputMask>
 
                                 <h:outputText value="Sexo: "/>
-                                <p:inputText id="sexo" value="#{pessoaController.pessoa.sexo}" />
+                                <h:selectOneMenu value="#{pessoaController.pessoa.sexo}">
+                                      <f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+                                      <f:selectItem itemValue="Feminino" itemLabel="Faminino" />
+                                </h:selectOneMenu>
 
                                 <h:outputLabel for="key" value="CPF: "/>
                                 <p:inputMask id="cpf" value="#{pessoaController.pessoa.cpf}" mask="999.999.999-99"/>
@@ -177,6 +184,43 @@
                     </p:dialog>
                 </p:layoutUnit>
 
+                <!-- Email -->
+                <h:form>            
+                    <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
+                        <p:graphicImage name="/demo/images/login.png" />
+                    </h:outputLink>
+
+                    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+                    <p:dialog header="E-mail" widgetVar="dlg" resizable="false">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputLabel for="username" value="Username:" />
+                            <p:inputText id="username" value="#{userLoginView.username}" required="true" label="username" />
+
+                            <h:outputLabel for="password" value="Password:" />
+                            <p:password id="password" value="#{userLoginView.password}" required="true" label="password" />
+
+                            <f:facet name="footer">
+                                <p:commandButton value="Login" update="growl" actionListener="#{userLoginView.login}"
+                                                 oncomplete="handleLoginRequest(xhr, status, args)" />
+                            </f:facet>  
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:form>
+                
+                <script type="text/javascript">
+                    function handleLoginRequest(xhr, status, args) {
+                        if(args.validationFailed || !args.loggedIn) {
+                            PF('dlg').jq.effect("shake", {times:5}, 100);
+                        }
+                        else {
+                            PF('dlg').hide();
+                            $('#loginLink').fadeOut();
+                        }
+                    }
+                </script>
+                
+                <!-- SMS -->
 
                 <p:dataTable id="pessoa" class="table table-bordered" value="#{pessoaController.buscaPessoas}" var="pessoa" >
                     <p:column>
@@ -253,7 +297,7 @@
                             <h:outputText value="Opções"/>
                         </f:facet>
                         <h:panelGrid style="border-style: hidden;" columns="2">
-                     
+                      
                                 <h:commandButton  class="btn btn-danger btn-xs" value="Excluir" action="#{pessoaController.excluir()}" 
                                                  onclick="if (!confirm('Confirma a exclusão ?'))
                                                              return false;">    
@@ -265,7 +309,14 @@
                                                  onclick="PF('dlgAlteraPaciente').show()">
                                     <f:ajax execute="@form" render=":alteraPaciente" />
                                 </h:commandButton>
-                       
+                            
+                            <h:commandButton  class="btn btn-success btn-xs" value=" Email " actionListener="#{mensagemController.sendEmail()}" >
+                                </h:commandButton>
+                            
+                                <h:commandButton  class="btn btn-success btn-xs" value="  SMS  " actionListener="#{pessoaController.prepararAlterarPessoa(actionEvent)}" 
+                                                 onclick="PF('dlgAlteraPaciente').show()">
+                                    <f:ajax execute="@form" render=":alteraPaciente" />
+                                </h:commandButton>
                         </h:panelGrid>
                     </p:column>
                 </p:dataTable>
@@ -274,6 +325,9 @@
 
                 <h:commandButton class="btn btn-primary" value="Adicionar" 
                                  onclick="PF('dlgPaciente').show()"/>
+                
+                <h:commandButton class="btn btn-primary" value="Enviar" 
+                                 action="#{mensagemController.sendEmail()}"/>
 
             </p:layoutUnit>
 

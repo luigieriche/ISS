@@ -6,13 +6,14 @@
 package br.com.clinica.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
+
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
+
 
 /**
  *
@@ -25,8 +26,8 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_pessoa;
     private String nome;
-  
-  
+
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date data_nascimento;
     
     private String email;
