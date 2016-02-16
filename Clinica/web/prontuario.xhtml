@@ -8,13 +8,9 @@
       xmlns:b="http://bootsfaces.net/ui">
 
     <h:head>
-        Clinica
-        
+        Prontuário
     </h:head>
-
     <h:body >
-     
-      
             <br/>
             <br/>
              
@@ -33,12 +29,12 @@
                                      
                                 </b:column >
                                 <b:column medium-screen="7"> 
-                                    
-                                     <b:inputText class="form-control" id="textBusca" value="#{prontuario.parametro}" />
+
+                                     <b:inputText class="form-control" id="textBusca" value="#{prontuarioController.parametro}" />
                                 </b:column>
                                 <b:column medium-screen="2">
                                     <b:selectOneMenu value="#{prontuarioController.campo}">
-                                        <f:selectItem itemValue="nome" itemLabel="Nome" />
+                                        <f:selectItem itemValue="id_prontuario" itemLabel="Prontuário" />
                                         <f:selectItem itemValue="telefone" itemLabel="Telefone" />
                                         <f:selectItem itemValue="email" itemLabel="Email" />
                                         <f:selectItem itemValue="cpf" itemLabel="CPF" />
@@ -50,7 +46,7 @@
                             <b:row>
                                 <b:column  medium-screen="2">
                                     <h:commandButton class="btn btn-primary" value="Buscar" id="cmdBusca" >
-                                        <f:ajax execute="@all" render=":pessoa" />
+                                        <f:ajax execute="@all" render=":prontuario" />
                                     </h:commandButton>
                                 </b:column>
                                 <b:column  medium-screen="2">    
@@ -75,35 +71,42 @@
                 <h:messages />
                 <!-- Incluir -->
                 <p:layoutUnit position="center">
-                    <p:dialog widgetVar="dlgPaciente" resizable="false" header="Adicionar Prontuário">
+                    <p:dialog widgetVar="dlgProntuario" resizable="false" header="Adicionar Prontuário">
                         <h:form id="adicionaProntuario">
                             <h:panelGrid columns="2" cellpadding="5">
                                 
                                 <h:outputLabel for="data_nascimento" value="Data do Prontuário: "/>
-                                <p:inputMask id="data_nascimento" value="#{prontuarioController.prontuario.data_cadastro}" mask="99-99-9999">
+                                <p:inputMask id="data_cadastro" value="#{prontuarioController.prontuario.data_cadastro}" mask="99-99-9999">
                                     <f:convertDateTime pattern="dd-MM-yyyy"/>
                                 </p:inputMask>
+                                
+                                <h:outputLabel value="Selecionar Paciente:" for="nome"/>
+                                <h:selectOneMenu>
+                                    <f:selectItems value="#{pessoaController.listaPessoas}" var="nome"
+                                                   itemLabel="#{pessoaController.pessoa.nome}" itemValue="#{pessoaControler.pessoa.id_pessoa}"/>
+                                </h:selectOneMenu>
+                                
                                 <h:outputText value="Paciente:"/>
-                                <p:inputText id="nome" value="#{prontuarioController.prontuario.id_paciente}" required="true" />
+                                <p:inputText id="id_paciente" value="#{prontuarioController.prontuario.id_paciente}" required="true" />
                                                                
-                                <h:outputText value="Email: "/>
-                                <p:inputText id="email" value="#{prontuarioController.prontuario.leito}" />
+                                <h:outputText value="Leito: "/>
+                                <p:inputText id="leito" value="#{prontuarioController.prontuario.leito}" />
 
                                 <h:outputText value="Diagnóstico: "/>
-                                <p:inputTextarea id="celular" value="#{prontuarioController.prontuario.diagnostico}"/>
+                                <p:inputTextarea id="diagnostico" value="#{prontuarioController.prontuario.diagnostico}"/>
                                 
                                 <h:outputText value="Prescrição "/>
-                                <p:inputTextarea id="celular" value="#{prontuarioController.prontuario.prescricao}"/>
+                                <p:inputTextarea id="prescricao" value="#{prontuarioController.prontuario.prescricao}"/>
 
                                 <h:outputText value="Exames: "/>
-                                <p:inputTextarea id="celular" value="#{prontuarioController.prontuario.exames}"/>
+                                <p:inputTextarea id="exames" value="#{prontuarioController.prontuario.exames}"/>
 
                             </h:panelGrid>
                             <br />
                             <h:panelGroup style="white-space: nowrap">
-                                <p:commandButton value="Salvar" id="salva" action="#{prontuarioControler.adicionar(actionEvent)}" 
+                                <p:commandButton value="Salvar" id="salva" action="#{prontuarioController.adicionar(actionEvent)}" 
                                                  onclick="PF('dlgProntuario').hide();">
-                                    <f:ajax execute="@form adicionaProntuario" render="@form :adicionaProntuario"/>
+                                      <f:ajax execute="@all" render=":prontuario" />
                                 </p:commandButton>
 
                                 <p:commandButton value="Limpar" type="reset" process="@this">
@@ -116,60 +119,8 @@
                     </p:dialog>
                 </p:layoutUnit>
 
-                <!-- Alterar -->
-                <p:layoutUnit position="center">
-                    <p:dialog widgetVar="dlgAlteraPaciente" resizable="false" header="Alterar Paciente" width="600">
-                        <h:form id="alteraPaciente">
 
-                            <h:panelGrid columns="2" cellpadding="5" >
-
-                                <h:outputText value="Nome: "/>
-                                <p:inputText id="nome" value="#{pessoaController.pessoa.nome}" required="true" />
-
-                                <h:outputText value="Email: "/>
-                                <p:inputText id="email" value="#{pessoaController.pessoa.email}" />
-
-                                <h:outputText value="Celular: "/>
-                                <p:inputMask id="celular" value="#{pessoaController.pessoa.celular}" mask="(99) 9999-9999"/>
-
-                                <h:outputLabel for="telefone" value="Telefone: "/>
-                                <p:inputMask id="telefone" value="#{pessoaController.pessoa.telefone}" mask="(99) 9999-9999"/>
-
-                                <h:outputLabel for="data_nascimento" value="Data de Nascimento: "/>                              
-                                 <p:inputMask id="data_nascimento" value="#{pessoaController.pessoa.data_nascimento}" mask="99-99-9999">
-                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                </p:inputMask>
-
-                                <h:outputText value="Sexo: "/>
-                                <h:selectOneMenu value="#{pessoaController.pessoa.sexo}">
-                                      <f:selectItem itemValue="Masculino" itemLabel="Masculino" />
-                                      <f:selectItem itemValue="Feminino" itemLabel="Faminino" />
-                                </h:selectOneMenu>
-
-                                <h:outputLabel for="key" value="CPF: "/>
-                                <p:inputMask id="cpf" value="#{pessoaController.pessoa.cpf}" mask="999.999.999-99"/>
-
-                                <h:outputText value="Cidade: "/>
-                                <p:inputText id="cidade" value="#{pessoaController.pessoa.cidade}" />
-
-                                <h:outputText value="Endereco: "/>
-                                <p:inputText id="endereco" value="#{pessoaController.pessoa.endereco}" />
-
-                                <h:outputText value="Número: "/>
-                                <p:inputText id="numero" value="#{pessoaController.pessoa.numero}" />
-
-                            </h:panelGrid>
-
-                            <p:commandButton value="Alterar" id="salva" actionListener="#{pessoaController.alterar(actionEvent)}" 
-                                             onclick="PF('pessoa').show();" oncomplete="PF('dlgAlteraPessoa').hide()"/>
-
-                        </h:form>
-                    </p:dialog>
-                </p:layoutUnit>
-
-             
-
-                <p:dataTable id="prontuario" class="table table-bordered" value="#{prontuarioController.listaProntuarios}" var="prontuario" >
+                <p:dataTable id="prontuario" class="table table-bordered" value="#{prontuarioController.buscaProntuarios}" var="prontuario" >
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Prontuario"/>
@@ -216,16 +167,16 @@
                         <f:facet name="header">
                             <h:outputText value="Exames"/>
                         </f:facet>
-                        <h:outputText value="#{pessoa.exames}"/>
+                        <h:outputText value="#{prontuario.exames}"/>
                     </p:column>
 
                     <p:column>
                         <h:panelGrid style="border-style: hidden;" columns="2">
                       
-                                <h:commandButton  class="btn btn-danger btn-xs" value="Excluir" action="#{prontuarioController.excluir()}" 
+                            <h:commandButton  class="btn btn-danger btn-xs" value="Excluir" action="#{prontuarioController.excluir()}" 
                                                  onclick="if (!confirm('Confirma a exclusão ?'))
                                                              return false;">    
-                                    <f:ajax execute="@all" render=":pessoa" />
+                                    <f:ajax execute="@all" render=":prontuario" />
                                 </h:commandButton>
 
 
@@ -242,8 +193,6 @@
 
                 <h:commandButton class="btn btn-primary" value="Adicionar" 
                                  onclick="PF('dlgProntuario').show()"/>
-                
-            
 
             </p:layoutUnit>
 

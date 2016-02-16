@@ -5,10 +5,10 @@
  */
 package br.com.clinica.dao;
 
-import br.com.clinica.model.Prontuario;
 import br.com.clinica.util.HibernateUtil;
-import java.util.List;
+import br.com.clinica.model.Prontuario;
 import org.hibernate.Session;
+import java.util.List;
 
 /**
  *
@@ -16,7 +16,8 @@ import org.hibernate.Session;
  */
 public class ProntuarioDao implements InterfaceProntuario{
  
-    public Prontuario getPessoa(Long id_prontuario) {
+    @Override
+    public Prontuario getProntuario(Long id_prontuario) {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         return (Prontuario) ss.load(Prontuario.class, id_prontuario);
     }
@@ -37,7 +38,6 @@ public class ProntuarioDao implements InterfaceProntuario{
             }
         } finally {
             HibernateUtil.getSessionFactory().getCurrentSession().close();
-
         }
     }
 
@@ -46,9 +46,12 @@ public class ProntuarioDao implements InterfaceProntuario{
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         
          try {
+            System.out.println("Entoru Try");
             ss.beginTransaction();
             try {
+                 System.out.println("Entoru delete");
                 ss.delete(prontuario);
+                 System.out.println("Entoru Commit");
                 ss.getTransaction().commit();
             } catch (Exception ex) {
                 // Log the exception here
@@ -81,30 +84,29 @@ public class ProntuarioDao implements InterfaceProntuario{
 
     }
 
+    
     @Override
     public List<Prontuario> list() {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         ss.beginTransaction();
-        List lista = ss.createQuery("From dadosprontuario ").list();
+        List lista = ss.createQuery("From prontuario ").list();
         ss.getTransaction().commit();
         return lista;
     }
     
     public List<Prontuario> busca(String nome, String campo) {
+         System.out.println("Entrou Busca");
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         ss.beginTransaction();
-        List lista = ss.createQuery("From dadosprontuario p where p." + campo +" = '" + nome + "'").list();
+        List lista = ss.createQuery("From prontuario p where p." + campo +" = '" + nome + "'").list();
         ss.getTransaction().commit();
         //ss.close();
         return lista;
         
     }
 
-    @Override
-    public Prontuario getProntuario(Long id_prontuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+   
+ 
     
 }
     

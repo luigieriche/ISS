@@ -5,11 +5,8 @@
  */
 package br.com.clinica.controller;
 
-import br.com.clinica.dao.InterfacePessoa;
 import br.com.clinica.dao.InterfaceProntuario;
-import br.com.clinica.dao.PessoaDao;
 import br.com.clinica.dao.ProntuarioDao;
-import br.com.clinica.model.Pessoa;
 import br.com.clinica.model.Prontuario;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
@@ -37,14 +34,14 @@ public class ProntuarioController implements Serializable{
     private DataModel listaProntuario;
 
     public Prontuario getProntuario() {
+        if (this.prontuario == null){
+            this.prontuario = new Prontuario();
+        }
         return prontuario;
     }
-
-    public void setProntuario(Prontuario prontuario) {
-        this.prontuario = prontuario;
-    }
-
-    public String getParametro() {
+    
+    
+       public String getParametro() {
         return parametro;
     }
 
@@ -59,13 +56,9 @@ public class ProntuarioController implements Serializable{
     public void setCampo(String campo) {
         this.campo = campo;
     }
-
-    public DataModel getListaProntuario() {
-        return listaProntuario;
-    }
-
-    public void setListaProntuario(DataModel listaProntuario) {
-        this.listaProntuario = listaProntuario;
+    
+    public void setProntuario(Prontuario prontuario) {
+        this.prontuario = prontuario;
     }
     
      public DataModel getListaProntuarios() {
@@ -73,16 +66,15 @@ public class ProntuarioController implements Serializable{
         listaProntuario = new ListDataModel(lista);
         return listaProntuario;
     }
+     
     
      public DataModel getBuscaProntuarios() {
-        List<Prontuario> lista;
-      lista = new ProntuarioDao().list();
-          /*    
+        List<Prontuario> lista;         
         if (parametro == null || "".equals(parametro))
             {lista = new ProntuarioDao().list();}
         else
             {lista = new ProntuarioDao().busca(parametro, campo);}
-        */
+        
         listaProntuario = new ListDataModel(lista);
         return listaProntuario;
     }
@@ -104,9 +96,9 @@ public class ProntuarioController implements Serializable{
     }
     
       public void excluir(){
-          Pessoa pessoa = (Pessoa)(listaProntuario.getRowData());
-          InterfacePessoa dao = new PessoaDao();
-          dao.remover(pessoa);
+          Prontuario prontuario = (Prontuario)(listaProntuario.getRowData());
+          InterfaceProntuario dao = new ProntuarioDao();
+          dao.remover(prontuario);
       }
       
       public Calendar parseData(String data) throws ParseException{

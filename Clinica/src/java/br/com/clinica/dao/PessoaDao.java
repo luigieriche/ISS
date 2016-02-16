@@ -6,9 +6,9 @@
 package br.com.clinica.dao;
 
 import br.com.clinica.util.HibernateUtil;
-import java.util.List;
 import br.com.clinica.model.Pessoa;
 import org.hibernate.Session;
+import java.util.List;
 
 /**
  *
@@ -40,8 +40,6 @@ public class PessoaDao implements InterfacePessoa{
             HibernateUtil.getSessionFactory().getCurrentSession().close();
 
         }
-        
-        pessoa = new Pessoa();
     }
 
     @Override
@@ -86,6 +84,7 @@ public class PessoaDao implements InterfacePessoa{
 
     @Override
     public List<Pessoa> list() {
+     
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         ss.beginTransaction();
         List lista = ss.createQuery("From pessoa ").list();
@@ -94,6 +93,7 @@ public class PessoaDao implements InterfacePessoa{
     }
     
     public List<Pessoa> busca(String nome, String campo) {
+        System.out.println("Entoru Busca");
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         ss.beginTransaction();
         List lista = ss.createQuery("From pessoa p where p." + campo +" = '" + nome + "'").list();
