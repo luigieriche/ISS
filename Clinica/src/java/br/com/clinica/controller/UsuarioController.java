@@ -41,10 +41,10 @@ public class UsuarioController implements Serializable{
         return listaUsuario;
     }
     
-    public String ValidaUsuairo(){
+    public String ValidaUsuario(){
         Usuario validador = new Usuario();
      
-          List<Usuario> lista = new UsuarioDao().list();
+        List<Usuario> lista = new UsuarioDao().list();
         int encontrou = -1;
           
         for (int i=0;i<lista.size();i++){

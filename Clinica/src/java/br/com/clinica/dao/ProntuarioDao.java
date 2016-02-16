@@ -14,13 +14,14 @@ import org.hibernate.Session;
  *
  * @author luiz.ferreira
  */
-public class ProntuarioDao {
+public class ProntuarioDao implements InterfaceProntuario{
  
     public Prontuario getPessoa(Long id_prontuario) {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         return (Prontuario) ss.load(Prontuario.class, id_prontuario);
     }
 
+    @Override
     public void salvar(Prontuario prontuario) {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
 
@@ -38,9 +39,9 @@ public class ProntuarioDao {
             HibernateUtil.getSessionFactory().getCurrentSession().close();
 
         }
-        prontuario = new Prontuario();
     }
 
+    @Override
     public void remover(Prontuario prontuario) {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         
@@ -60,6 +61,7 @@ public class ProntuarioDao {
         }
     }
 
+    @Override
     public void atualizar(Prontuario prontuario) {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         
@@ -79,10 +81,11 @@ public class ProntuarioDao {
 
     }
 
+    @Override
     public List<Prontuario> list() {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         ss.beginTransaction();
-        List lista = ss.createQuery("From prontuario ").list();
+        List lista = ss.createQuery("From dadosprontuario ").list();
         ss.getTransaction().commit();
         return lista;
     }
@@ -90,11 +93,16 @@ public class ProntuarioDao {
     public List<Prontuario> busca(String nome, String campo) {
         Session ss = HibernateUtil.getSessionFactory().getCurrentSession();
         ss.beginTransaction();
-        List lista = ss.createQuery("From prontuario p where p." + campo +" = '" + nome + "'").list();
+        List lista = ss.createQuery("From dadosprontuario p where p." + campo +" = '" + nome + "'").list();
         ss.getTransaction().commit();
         //ss.close();
         return lista;
         
+    }
+
+    @Override
+    public Prontuario getProntuario(Long id_prontuario) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

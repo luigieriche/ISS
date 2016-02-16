@@ -2,11 +2,19 @@
 package br.com.clinica.model;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Temporal;
+import java.io.Serializable;
 
-
-public class Mensagem {
-
+@Entity(name="mensagem")
+public class Mensagem implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int idMensagem;
     private int idPaciente;
     private String titulo;

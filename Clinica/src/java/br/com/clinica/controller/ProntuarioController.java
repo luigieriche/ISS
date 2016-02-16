@@ -5,10 +5,23 @@
  */
 package br.com.clinica.controller;
 
+import br.com.clinica.dao.InterfacePessoa;
+import br.com.clinica.dao.InterfaceProntuario;
+import br.com.clinica.dao.PessoaDao;
+import br.com.clinica.dao.ProntuarioDao;
+import br.com.clinica.model.Pessoa;
 import br.com.clinica.model.Prontuario;
+import java.awt.event.ActionEvent;
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 
 /**
  *
@@ -16,7 +29,7 @@ import javax.faces.model.DataModel;
  */
 @ManagedBean
 @ViewScoped
-public class ProntuarioController {
+public class ProntuarioController implements Serializable{
     
     private Prontuario prontuario;
     private String parametro = null;
@@ -54,5 +67,57 @@ public class ProntuarioController {
     public void setListaProntuario(DataModel listaProntuario) {
         this.listaProntuario = listaProntuario;
     }
+    
+     public DataModel getListaProntuarios() {
+        List<Prontuario> lista = new ProntuarioDao().list();
+        listaProntuario = new ListDataModel(lista);
+        return listaProntuario;
+    }
+    
+     public DataModel getBuscaProntuarios() {
+        List<Prontuario> lista;
+      lista = new ProntuarioDao().list();
+          /*    
+        if (parametro == null || "".equals(parametro))
+            {lista = new ProntuarioDao().list();}
+        else
+            {lista = new ProntuarioDao().busca(parametro, campo);}
+        */
+        listaProntuario = new ListDataModel(lista);
+        return listaProntuario;
+    }
+    
+     public void prepararAlterarProntuario(ActionEvent actionEvent){
+        prontuario = (Prontuario)(listaProntuario.getRowData());
+    }
+     
+     public void adicionar(ActionEvent actionEvent){
+        InterfaceProntuario dao = new ProntuarioDao();
+        dao.salvar(prontuario);
+        this.prontuario = new Prontuario();
+    }
+     
+      public void alterar(ActionEvent actionEvent){
+        InterfaceProntuario dao = new ProntuarioDao();
+        dao.atualizar(prontuario);
+        this.prontuario = new Prontuario();
+    }
+    
+      public void excluir(){
+          Pessoa pessoa = (Pessoa)(listaProntuario.getRowData());
+          InterfacePessoa dao = new PessoaDao();
+          dao.remover(pessoa);
+      }
+      
+      public Calendar parseData(String data) throws ParseException{
+      try{
+          Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+          Calendar calendar = Calendar.getInstance();
+          calendar.setTime(date);
+          return calendar;
+      }catch (ParseException e){
+          throw new IllegalArgumentException(e);
+        }
+      }
     
 }

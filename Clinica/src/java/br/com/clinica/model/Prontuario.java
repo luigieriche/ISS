@@ -19,10 +19,11 @@ import javax.persistence.Temporal;
  */
 @Entity(name="dadosProntuario")
 public class Prontuario implements Serializable{
-
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_prontuario;
+    
     private int id_paciente;
 
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -32,6 +33,19 @@ public class Prontuario implements Serializable{
     private String diagnostico;
     private String prescricao;
     private String exames;
+    
+    public Prontuario (){}
+    
+    public Prontuario(int id_prontuario, int id_paciente, Date data_cadastro, String leito, String diagnostico, String prescricao, String exames){
+        this.id_prontuario = id_prontuario;
+        this.id_paciente = id_paciente;
+        this.data_cadastro = data_cadastro;
+        this.leito = leito;
+        this.diagnostico = diagnostico;
+        this.prescricao = prescricao;
+        this.exames = exames;
+    }
+
 
     public int getId_prontuario() {
         return id_prontuario;

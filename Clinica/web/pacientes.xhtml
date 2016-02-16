@@ -185,42 +185,45 @@
                 </p:layoutUnit>
 
                 <!-- Email -->
-                <h:form>            
-                    <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
-                        <p:graphicImage name="/demo/images/login.png" />
-                    </h:outputLink>
+               
+                <p:layoutUnit position="center">
+                    <p:dialog widgetVar="dlgMensagem" resizable="false" header="Envair Mensagem">
+                        <h:form id="enviarMensagem">
+                            <h:panelGrid columns="2" cellpadding="5">
 
-                    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                                <h:outputText value="Assunto: "/>
+                                <p:inputText id="assunto" value="" required="true" />
+                                                               
+                                <h:outputText value="Email: "/>
+                                <p:inputTextarea id="texto_mensagem" value="" />
 
-                    <p:dialog header="E-mail" widgetVar="dlg" resizable="false">
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputLabel for="username" value="Username:" />
-                            <p:inputText id="username" value="#{userLoginView.username}" required="true" label="username" />
+                                <h:outputText value="Tipo: "/>
+                                <h:selectOneMenu value="">
+                                      <f:selectItem itemValue="email" itemLabel="E-mail" />
+                                      <f:selectItem itemValue="sms" itemLabel="SMS" />
+                                </h:selectOneMenu>
+                                
 
-                            <h:outputLabel for="password" value="Password:" />
-                            <p:password id="password" value="#{userLoginView.password}" required="true" label="password" />
+                            </h:panelGrid>
+                            <br />
+                            <h:panelGroup style="white-space: nowrap">
+                                <p:commandButton value="Salvar" id="salva" action="#{pessoaController.adicionar(actionEvent)}" 
+                                                 onclick="PF('dlgPessoa').hide();">
+                                    <f:ajax execute="@form adicionaPaciente" render="@form :adicionaPessoa"/>
+                                </p:commandButton>
 
-                            <f:facet name="footer">
-                                <p:commandButton value="Login" update="growl" actionListener="#{userLoginView.login}"
-                                                 oncomplete="handleLoginRequest(xhr, status, args)" />
-                            </f:facet>  
-                        </h:panelGrid>
+                                <p:commandButton value="Limpar" type="reset" process="@this">
+                                    <p:resetInput target="@form" />
+                                </p:commandButton>
+
+                                <p:commandButton value="Cancelar" type="reset" onclick="PF('dlgPaciente').hide()" />   
+                            </h:panelGroup>
+                        </h:form>
                     </p:dialog>
-                </h:form>
+                </p:layoutUnit>
                 
-                <script type="text/javascript">
-                    function handleLoginRequest(xhr, status, args) {
-                        if(args.validationFailed || !args.loggedIn) {
-                            PF('dlg').jq.effect("shake", {times:5}, 100);
-                        }
-                        else {
-                            PF('dlg').hide();
-                            $('#loginLink').fadeOut();
-                        }
-                    }
-                </script>
                 
-                <!-- SMS -->
+                
 
                 <p:dataTable id="pessoa" class="table table-bordered" value="#{pessoaController.buscaPessoas}" var="pessoa" >
                     <p:column>
@@ -310,13 +313,10 @@
                                     <f:ajax execute="@form" render=":alteraPaciente" />
                                 </h:commandButton>
                             
-                            <h:commandButton  class="btn btn-success btn-xs" value=" Email " actionListener="#{mensagemController.sendEmail()}" >
+                            <h:commandButton  class="btn btn-success btn-xs" value=" Email " actionListener="#{mensagemController.sendEmail()}" 
+                                               onclick="PF('dlgMensagem').show()">
                                 </h:commandButton>
                             
-                                <h:commandButton  class="btn btn-success btn-xs" value="  SMS  " actionListener="#{pessoaController.prepararAlterarPessoa(actionEvent)}" 
-                                                 onclick="PF('dlgAlteraPaciente').show()">
-                                    <f:ajax execute="@form" render=":alteraPaciente" />
-                                </h:commandButton>
                         </h:panelGrid>
                     </p:column>
                 </p:dataTable>

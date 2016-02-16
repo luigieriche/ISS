@@ -15,5 +15,8 @@
     <mapping class="br.com.clinica.model.Pessoa"/>
     <mapping class="br.com.clinica.model.Consulta"/>
     <mapping class="br.com.clinica.model.Usuario"/>
+    <mapping class="br.com.clinica.model.Mensagem"/>
+    <mapping class="br.com.clinica.model.DadosAdicionais"/>
+    <mapping class="br.com.clinica.model.Prontuario"/>
   </session-factory>
 </hibernate-configuration>
