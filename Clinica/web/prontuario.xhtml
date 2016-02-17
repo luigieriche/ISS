@@ -8,8 +8,9 @@
       xmlns:b="http://bootsfaces.net/ui">
 
     <h:head>
-        Prontuário
+  
     </h:head>
+    
     <h:body >
             <br/>
             <br/>
@@ -19,25 +20,34 @@
            
 
                 <!-- Buscar -->
-               
                 <h:form id="buscaPaciente" style="padding-top: 80px;" >
+                     <b:row>
+                        <b:column medium-screen="5">                                    
+                        </b:column >
+                        <b:column medium-screen="2">
+                            <h3>PRONTUÁRIOS</h3>                                   
+                        </b:column >
+                        <b:column medium-screen="5">                                    
+                        </b:column >
+                    </b:row>
+                    <br/> 
+                    
                     <b:row>
                         <b:column medium-screen="6">
                             <b:row>
-                                <b:column medium-screen="3">
-                                    <h4>Pesquisar prontuário:</h4>
+                                <b:column medium-screen="2">
+                                    <h4>Pesquisar:</h4>
                                      
                                 </b:column >
                                 <b:column medium-screen="7"> 
 
                                      <b:inputText class="form-control" id="textBusca" value="#{prontuarioController.parametro}" />
                                 </b:column>
-                                <b:column medium-screen="2">
+                                <b:column medium-screen="3">
                                     <b:selectOneMenu value="#{prontuarioController.campo}">
                                         <f:selectItem itemValue="id_prontuario" itemLabel="Prontuário" />
-                                        <f:selectItem itemValue="telefone" itemLabel="Telefone" />
-                                        <f:selectItem itemValue="email" itemLabel="Email" />
-                                        <f:selectItem itemValue="cpf" itemLabel="CPF" />
+                                        <f:selectItem itemValue="data_cadastro" itemLabel="Data" />
+                                        <f:selectItem itemValue="id_paciente" itemLabel="Paciente" />
                                     </b:selectOneMenu>
                                 </b:column>
                             </b:row>
@@ -56,39 +66,33 @@
                                   </b:column>  
                                 <b:column  medium-screen="8"></b:column>
                             </b:row>
-                        </b:column> 
-                          
-                            
-                        
+                        </b:column>                         
                         <b:column  medium-screen="3">
                             
                         </b:column>
-
                     </b:row>
-
                 </h:form>
                  
-                <h:messages />
+
                 <!-- Incluir -->
                 <p:layoutUnit position="center">
                     <p:dialog widgetVar="dlgProntuario" resizable="false" header="Adicionar Prontuário">
                         <h:form id="adicionaProntuario">
                             <h:panelGrid columns="2" cellpadding="5">
-                                
-                                <h:outputLabel for="data_nascimento" value="Data do Prontuário: "/>
-                                <p:inputMask id="data_cadastro" value="#{prontuarioController.prontuario.data_cadastro}" mask="99-99-9999">
+                                <h:outputLabel for="data_nascimento" value="Data do Prontuário*: "/>
+                                <p:inputMask id="data_cadastro" value="#{prontuarioController.prontuario.data_cadastro}" mask="99-99-9999" required="true">
                                     <f:convertDateTime pattern="dd-MM-yyyy"/>
                                 </p:inputMask>
                                 
                                 <h:outputLabel value="Selecionar Paciente:" for="nome"/>
                                 <h:selectOneMenu>
                                     <f:selectItems value="#{pessoaController.listaPessoas}" var="nome"
-                                                   itemLabel="#{pessoaController.pessoa.nome}" itemValue="#{pessoaControler.pessoa.id_pessoa}"/>
+                                                   itemLabel="#{prontuario.id_paciente}" itemValue="#{prontuario.id_paciente}"/>
                                 </h:selectOneMenu>
                                 
-                                <h:outputText value="Paciente:"/>
-                                <p:inputText id="id_paciente" value="#{prontuarioController.prontuario.id_paciente}" required="true" />
-                                                               
+                                <h:outputText value="Paciente*:"/>
+                                <p:inputText id="id_paciente" value="#{prontuarioController.prontuario.id_paciente}" required="true" />      
+                                
                                 <h:outputText value="Leito: "/>
                                 <p:inputText id="leito" value="#{prontuarioController.prontuario.leito}" />
 
@@ -109,9 +113,9 @@
                                       <f:ajax execute="@all" render=":prontuario" />
                                 </p:commandButton>
 
-                                <p:commandButton value="Limpar" type="reset" process="@this">
-                                    <p:resetInput target="@form" />
-                                </p:commandButton>
+                                    <h:commandButton class="btn btn-primary" value="Limpar" type="reset">
+                                        <p:resetInput target="@form" />
+                                    </h:commandButton>  
 
                                 <p:commandButton value="Cancelar" type="reset" onclick="PF('dlgProntuario').hide()" />   
                             </h:panelGroup>
@@ -119,6 +123,47 @@
                     </p:dialog>
                 </p:layoutUnit>
 
+                <!-- Alterar -->
+                <p:layoutUnit position="center">
+                    <p:dialog widgetVar="dlgAlteraProntuario" resizable="false" header="Alterar Prontuario">
+                        <h:form id="alteraProntuario">
+
+                            <h:panelGrid columns="2" cellpadding="5" >
+
+                                <h:outputText value="Código do Prontuário: "/>
+                                <p:inputText id="altid_prontuario" disabled="true" value="#{prontuarioController.prontuario.id_prontuario}" required="true" />
+
+                                <h:outputLabel for="data_cadastro" value="Data do Prontuário: "/>                              
+                                <p:inputMask id="altdata_nascimento" value="#{prontuarioController.prontuario.data_cadastro}" mask="99-99-9999">
+                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                </p:inputMask>
+                                
+                                <h:outputLabel value="Selecionar Paciente:" for="nome"/>
+                                <h:selectOneMenu value="#{prontuarioController.prontuario.id_paciente}">
+                                    <f:selectItems value="#{prontuarioController.listaProntuarios}" var="nome"
+                                                   itemLabel="#{prontuario.id_paciente}" itemValue="#{prontuario.id_paciente}"/>
+                                </h:selectOneMenu>
+                                
+                                <h:outputText value="Leito: "/>
+                                <p:inputText id="altleito" value="#{prontuarioController.prontuario.leito}" />
+
+                                <h:outputText value="Diagnóstico: "/>
+                                <p:inputTextarea  value="#{prontuarioController.prontuario.diagnostico}" />
+                                
+                                <h:outputText value="Prescrição: "/>
+                                <p:inputTextarea id="altprescricao" value="#{prontuarioController.prontuario.prescricao}" />
+
+                                <h:outputText value="Exames: "/>
+                                <p:inputTextarea id="altdiagnostico" value="#{prontuarioController.prontuario.exames}" />
+
+                            </h:panelGrid>
+
+                            <p:commandButton value="Salvar" id="salva" actionListener="#{prontuarioController.alterar(actionEvent)}" 
+                                             onclick="PF('prontuario').show();" oncomplete="PF('dlgAlteraProntuario').hide()"/>
+
+                        </h:form>
+                    </p:dialog>
+                </p:layoutUnit>
 
                 <p:dataTable id="prontuario" class="table table-bordered" value="#{prontuarioController.buscaProntuarios}" var="prontuario" >
                     <p:column>
